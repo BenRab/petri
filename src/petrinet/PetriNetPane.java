@@ -8,11 +8,17 @@ package petrinet;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -22,27 +28,38 @@ import javafx.scene.shape.Shape;
  * @author ben
  */
 public abstract class PetriNetPane extends Pane {
-    Circle c1;
-    Circle c2;
-    Circle c3;
-    Circle c4;
-    Rectangle r;
-    Shape s;
+    boolean selected;
+    Shape shape;
+    AnchorPane anchor;
     
     public final int RADIUS = 3;
     public final String COLOR = "PERU";
     
-    public PetriNetPane(double x, double y, double width, double height, Shape s) {
+    public PetriNetPane(final Shape s, Color p, AnchorPane a) {
+        shape = s;
+        anchor = a;
+        s.setFill(p);
         s.setStroke(Color.BLACK);
-        r = new Rectangle(x, y, height, width);
-        c1 = initCircle(c1, x, y, 0);
-        c2 = initCircle(c2, x + width, y, 1);
-        c3 = initCircle(c3, x, y + height, 2);
-        c4 = initCircle(c4, x + width, y + height, 3);
-        
-        //c1.setVisible(true);
-        
-        getChildren().addAll(c1, c2, c3, c4, s);
+        setDragHandler(s);
+        setContextMenu(s);
+        getChildren().addAll(s);
+        selected = false;
+        anchor.getChildren().addAll(s);
+    }
+    
+    public boolean isSelected() {
+        return selected;
+    }
+    
+    public void setSelected(boolean b) {
+        selected = b;
+        if (selected) {
+            shape.setStroke(Color.RED);
+            shape.setStrokeDashOffset(5);
+        }
+        else {
+            shape.setStroke(Color.BLACK);
+        }
     }
     
     private Circle initCircle(Circle c, double x, double y, int type) {
@@ -55,82 +72,59 @@ public abstract class PetriNetPane extends Pane {
         return c;
     }
     
-    private double dragDeltaXS, dragDeltaYS, dragDeltaXC1, dragDeltaYC1, dragDeltaXC2, dragDeltaYC2, dragDeltaXC3, dragDeltaYC3, dragDeltaXC4, dragDeltaYC4; 
+    private double dragDeltaY, dragDeltaX;
     
-    private void setDragHandler( final Shape circle, final int type) {
-    circle.setOnMousePressed( new EventHandler<MouseEvent>() {
-      @Override public void handle( MouseEvent mouseEvent ) {
-        dragDeltaXC1 = c1.getCenterX() - mouseEvent.getSceneX();
-        dragDeltaYC1 = c1.getCenterY() - mouseEvent.getSceneY();
-        dragDeltaXC2 = c2.getCenterX() - mouseEvent.getSceneX();
-        dragDeltaYC2 = c2.getCenterY() - mouseEvent.getSceneY();
-        dragDeltaXC3 = c3.getCenterX() - mouseEvent.getSceneX();
-        dragDeltaYC3 = c3.getCenterY() - mouseEvent.getSceneY();
-        dragDeltaXC4 = c4.getCenterX() - mouseEvent.getSceneX();
-        dragDeltaYC4 = c4.getCenterY() - mouseEvent.getSceneY();
-        //dragDeltaXS = s.getLayoutX() - mouseEvent.getSceneX();
-        //dragDeltaYS = s.getLayoutY() - mouseEvent.getSceneY();
-      }
-    } );
-
-    circle.setOnMouseDragged( new EventHandler<MouseEvent>() {
-      @Override public void handle( MouseEvent mouseEvent ) {
-          if (type == 0 ) {
-            c1.setCenterX(mouseEvent.getSceneX() + dragDeltaXC1);
-            c1.setCenterY(mouseEvent.getSceneY() + dragDeltaYC1);
-            c2.setCenterY(mouseEvent.getSceneY() + dragDeltaYC2);
-            c3.setCenterX(mouseEvent.getSceneX() + dragDeltaXC3);
+    private void setContextMenu(Shape shape) {
+        final MenuItem resizeItem = new MenuItem("Resize");
+        resizeItem.setOnAction(new EventHandler<ActionEvent>() {
+          @Override public void handle(ActionEvent event) {
+            System.out.println("Resize requested");
           }
-          else if (type == 1) {
-            c1.setCenterY(mouseEvent.getSceneY() + dragDeltaYC1);
-            c2.setCenterX(mouseEvent.getSceneX() + dragDeltaXC2);
-            c2.setCenterY(mouseEvent.getSceneY() + dragDeltaYC2);
-            c4.setCenterX(mouseEvent.getSceneX() + dragDeltaXC4);
-          }
-          else if (type == 2) {
-            c1.setCenterX(mouseEvent.getSceneX() + dragDeltaXC1);
-            c3.setCenterX(mouseEvent.getSceneX() + dragDeltaXC3);
-            c3.setCenterY(mouseEvent.getSceneY() + dragDeltaYC3);
-            c4.setCenterY(mouseEvent.getSceneY() + dragDeltaYC4);
-          }
-          else {
-            c4.setCenterX(mouseEvent.getSceneX() + dragDeltaXC4);
-            c4.setCenterY(mouseEvent.getSceneY() + dragDeltaYC4);
-            c3.setCenterY(mouseEvent.getSceneY() + dragDeltaYC3);
-            c2.setCenterX(mouseEvent.getSceneX() + dragDeltaXC2);
-          }
-                    
-          if (s instanceof Circle) {
-              Circle c = (Circle) s;
-              c.setRadius(45);
-          }
-          
-        //s.setLayoutX(mouseEvent.getSceneX()  + dragDeltaXS);
-        //s.setLayoutY(mouseEvent.getSceneY() + dragDeltaYS);
-          circle.setCursor( Cursor.MOVE );
-        }
-    } );
-
-    circle.setOnMouseEntered( new EventHandler<MouseEvent>() {
-      @Override public void handle( MouseEvent mouseEvent ) {
-        circle.setCursor( Cursor.HAND );
-      }
-    } );
-
-    circle.setOnMouseReleased( new EventHandler<MouseEvent>() {
-      @Override public void handle( MouseEvent mouseEvent ) {
-        circle.setCursor( Cursor.HAND );
-      }
-    } );
-    
-    circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-            c1.setVisible(true);
-            c2.setVisible(true);
-            c3.setVisible(true);
-            c4.setVisible(true);
-            }
         });
-  }
+
+        final ContextMenu menu = new ContextMenu(
+          resizeItem
+        );
+
+        shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
+          @Override public void handle(MouseEvent event) {
+            setSelected(true);
+            if (MouseButton.SECONDARY.equals(event.getButton())) {
+              menu.show(anchor, event.getScreenX(), event.getScreenY());
+            }  
+          }
+        });
+    }
+    
+    private void setDragHandler( final Shape shape ) {
+        
+        shape.setOnMousePressed( new EventHandler<MouseEvent>() {
+          @Override public void handle( MouseEvent mouseEvent ) {
+            dragDeltaX = shape.getLayoutX()- mouseEvent.getSceneX();
+            dragDeltaY = shape.getLayoutY() - mouseEvent.getSceneY();
+          }
+        } );
+
+        shape.setOnMouseDragged( new EventHandler<MouseEvent>() {
+          @Override public void handle( MouseEvent mouseEvent ) {
+            shape.setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
+            shape.setLayoutY( mouseEvent.getSceneY() + dragDeltaY );
+            shape.setCursor( Cursor.MOVE );
+          }
+        } );
+
+        shape.setOnMouseEntered( new EventHandler<MouseEvent>() {
+          @Override public void handle( MouseEvent mouseEvent ) {
+            shape.setCursor( Cursor.HAND );
+          }
+        } );
+
+        shape.setOnMouseReleased( new EventHandler<MouseEvent>() {
+          @Override public void handle( MouseEvent mouseEvent ) {
+            shape.setCursor( Cursor.HAND );
+          }
+        } );
+    }
+
+    abstract boolean isPointInElement(double x, double y);
 }

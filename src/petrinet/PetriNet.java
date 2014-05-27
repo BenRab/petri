@@ -24,6 +24,7 @@ public class PetriNet extends Application {
         
         Scene scene = new Scene(root);
         
+        stage.setTitle("Petri Netz Editor");
         stage.setScene(scene);
         stage.show();
     }

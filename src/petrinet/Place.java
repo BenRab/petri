@@ -6,6 +6,7 @@
 
 package petrinet;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -14,10 +15,15 @@ import javafx.scene.shape.Circle;
  * @author ben
  */
 public class Place extends PetriNetPane {   
-    public Place(double x, double y, double radius) {
-        super(x - radius, y - radius, 2*radius, 2*radius, new Circle(x, y, radius, Color.WHITE));
+    public Place(double x, double y, double radius, AnchorPane a) {
+        super(new Circle(x, y, radius), Color.WHITE, a);
     }
     //public Place(double x, double y) {
       //  super(x - 30, y - 30, 2*30, 2*30, new Circle(x, y, 30, Color.WHITE));
     //}
+
+    @Override
+    boolean isPointInElement(double x, double y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
