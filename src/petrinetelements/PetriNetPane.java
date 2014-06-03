@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 
-package petrinet;
+package petrinetelements;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import CommandSystem.ComandIF;
+import CommandSystem.ComandProcessor;
+import PetriNetCommands.DragAndDropCommand;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -18,9 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 /**
@@ -31,20 +30,23 @@ public abstract class PetriNetPane extends Pane {
     boolean selected;
     Shape shape;
     AnchorPane anchor;
+    ComandProcessor processor;
+    private double dragDeltaY, dragDeltaX;
+    double x, y;
     
     public final int RADIUS = 3;
     public final String COLOR = "PERU";
     
-    public PetriNetPane(final Shape s, Color p, AnchorPane a) {
+    public PetriNetPane(final Shape s, Color p, AnchorPane a, ComandProcessor c) {
         shape = s;
         anchor = a;
+        processor = c;
         s.setFill(p);
         s.setStroke(Color.BLACK);
-        setDragHandler(s);
+        setDragHandler(s, this);
         setContextMenu(s);
         getChildren().addAll(s);
         selected = false;
-        anchor.getChildren().addAll(s);
     }
     
     public boolean isSelected() {
@@ -72,7 +74,6 @@ public abstract class PetriNetPane extends Pane {
         return c;
     }
     
-    private double dragDeltaY, dragDeltaX;
     
     private void setContextMenu(Shape shape) {
         final MenuItem resizeItem = new MenuItem("Resize");
@@ -96,35 +97,41 @@ public abstract class PetriNetPane extends Pane {
         });
     }
     
-    private void setDragHandler( final Shape shape ) {
+    private void setDragHandler( final Shape shape, final PetriNetPane p ) {  
+        x = p.getLayoutX();
+        y = p.getLayoutY();
         
         shape.setOnMousePressed( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            dragDeltaX = shape.getLayoutX()- mouseEvent.getSceneX();
-            dragDeltaY = shape.getLayoutY() - mouseEvent.getSceneY();
+            x = p.getLayoutX();
+            y = p.getLayoutY();
+            dragDeltaX = getLayoutX()- mouseEvent.getSceneX();
+            dragDeltaY = getLayoutY() - mouseEvent.getSceneY();
           }
         } );
 
         shape.setOnMouseDragged( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            shape.setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
-            shape.setLayoutY( mouseEvent.getSceneY() + dragDeltaY );
-            shape.setCursor( Cursor.MOVE );
+            setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
+            setLayoutY( mouseEvent.getSceneY() + dragDeltaY );
+            setCursor( Cursor.MOVE );
           }
         } );
 
         shape.setOnMouseEntered( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            shape.setCursor( Cursor.HAND );
+            setCursor( Cursor.HAND );
           }
         } );
 
         shape.setOnMouseReleased( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            shape.setCursor( Cursor.HAND );
+            setCursor( Cursor.HAND );
+            ComandIF c = new DragAndDropCommand(p, x, y);
+            processor.setCommandExecuted(c);
           }
         } );
     }
 
-    abstract boolean isPointInElement(double x, double y);
+    public abstract boolean isPointInElement(double x, double y);
 }

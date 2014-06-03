@@ -6,11 +6,20 @@
 
 package petrinet;
 
+import petrinetelements.Transition;
+import petrinetelements.TimedTransition;
+import petrinetelements.PetriNetPane;
+import CommandSystem.ComandIF;
+import CommandSystem.ComandProcessor;
+import PetriNetCommands.AddPlaceCommand;
+import PetriNetCommands.AddTimedTransition;
+import PetriNetCommands.AddTransitionCommand;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +28,12 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -35,7 +48,9 @@ import javafx.stage.Stage;
  */
 public class FXMLDocumentController implements Initializable {
     
-        private Label label;
+    private ComandProcessor processor;
+    
+    private Label label;
     @FXML
     private MenuBar editm;
     @FXML
@@ -52,9 +67,20 @@ public class FXMLDocumentController implements Initializable {
     private Font x3;
     @FXML
     private Color x4;
+    @FXML
+    private TabPane tabs;
+    @FXML
+    private MenuItem undoMenu;
+    @FXML
+    private MenuItem redoMenu;
+    @FXML
+    private Button redoButton;
+    @FXML
+    private Button undoButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        processor = new ComandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         a.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
@@ -75,7 +101,7 @@ public class FXMLDocumentController implements Initializable {
         //Stage stage = new Stage(); 
         //stage.setScene(new Scene(new Group(new Text(10,10, "my second window")))); 
         //stage.show();
-        
+        tabs.getTabs().addAll(new Tab("Test"));
         
     }
 
@@ -133,10 +159,12 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleUndo(ActionEvent event) {
+        processor.undoLastCommand();
     }
 
     @FXML
     private void handleRedo(ActionEvent event) {
+        processor.redoLastCommand();
     }
 
     @FXML
@@ -169,18 +197,29 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handlePlace(ActionEvent event) {
-        Place p = new Place(100, 100, 30, a);
-        a.getChildren().addAll(p);
+        ComandIF c = new AddPlaceCommand("fsd", a, processor);
+        processor.executeCommand(c);
     }
 
     @FXML
     private void handleTransition(ActionEvent event) {
-        Transition t = new Transition(100, 100, 25, 90, a);
-        a.getChildren().addAll(t);
+        ComandIF c = new AddTransitionCommand(a, processor);
+        processor.executeCommand(c);
     }
 
     @FXML
     private void handleTimedTransition(ActionEvent event) {
+        ComandIF c = new AddTimedTransition(a, processor);
+        processor.executeCommand(c);
     }
+
+    @FXML
+    private void saveTab(Event event) {
+    }
+
+    @FXML
+    private void selectNewTab(Event event) {
+    }
+
     
 }

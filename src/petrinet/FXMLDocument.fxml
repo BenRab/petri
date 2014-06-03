@@ -2,8 +2,6 @@
 
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
@@ -30,8 +28,8 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
-            <MenuItem mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
+            <MenuItem fx:id="undoMenu" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
+            <MenuItem fx:id="redoMenu" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#handleCut" text="Cut" />
             <MenuItem mnemonicParsing="false" onAction="#handleCopy" text="Copy" />
@@ -50,19 +48,24 @@
       </menus>
     </MenuBar>
     <ToolBar>
-          <items>
-            <Button mnemonicParsing="false" onAction="#handleNew" style="-fx-graphic: url('http://www.diskinspector.com/help/images/new_button.gif');" text="" />
+          <items>            
+            <Button mnemonicParsing="false" onAction="#handleNew" style="-fx-graphic: url('http://icons.iconarchive.com/icons/saki/nuoveXT-2/24/Actions-document-new-icon.png');" text="" />
             <Button mnemonicParsing="false" onAction="#handleOpen" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-9/24/open-file-icon.png');" text="" />
-            <Button mnemonicParsing="false" onAction="#handleSaveAs" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-7/24/Save-icon.png');" text="" />
             <Button mnemonicParsing="false" onAction="#handleSaveAs" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-7/24/Save-icon.png');" text="" />
             <Button mnemonicParsing="false" text="Button" />
             <Separator orientation="VERTICAL" />
+            <Button fx:id="redoButton" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
+            <Button fx:id="undoButton" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
+            <Separator orientation="VERTICAL" />
             <Button mnemonicParsing="false" onAction="#handlePlace" text="Place" />
-            <Button mnemonicParsing="false" onAction="#handleTransition" text="Transition" />
+            <Button mnemonicParsing="false" onAction="#handleTransition" style="-fx-graphic: url('http://icons.iconarchive.com/icons/visualpharm/ios7v2/24/Imagetools-Rectangle-icon.png');" text="" />
             <Button mnemonicParsing="false" onAction="#handleTimedTransition" text="Timed Transition" />
+            <Separator orientation="VERTICAL" />
+            <Button mnemonicParsing="false" onAction="#handleTimedTransition" text="Arrow" />
+            <Button mnemonicParsing="false" onAction="#handleTimedTransition" text="Inhibitor" />
           </items>
         </ToolBar>
-    <SplitPane dividerPositions="0.23496659242761692, 0.7193763919821826" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.1, 0.7193763919821826" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <AnchorPane fx:id="elements">
           <children>
@@ -77,25 +80,35 @@
           </children>
         </AnchorPane>
         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="-1.0" prefWidth="-1.0">
-<content><TabPane tabClosingPolicy="UNAVAILABLE">
+            <content>
+                <AnchorPane>
+<children><TabPane fx:id="tabs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="515.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
   <tabs>
-    <Tab text="Untitled Tab 1" />
-    <Tab text="Untitled Tab 2" />
+    <Tab onClosed="#saveTab" onSelectionChanged="#selectNewTab" text="Untitled Tab 1">
+      <content>
+        <AnchorPane fx:id="a" />
+      </content>
+    </Tab>
+    <Tab text="Untitled Tab 2">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
   </tabs>
 </TabPane>
-<AnchorPane fx:id="a">
-<children><Canvas height="200.0" width="200.0" /><Group layoutX="213.5" layoutY="329.5" />
-</children></AnchorPane> 
-</content>
+</children>
+                </AnchorPane> 
+            </content>
         </ScrollPane>
         <AnchorPane SplitPane.resizableWithParent="false">
           <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" /><TableView layoutY="35.0">
-  <columns>
-    <TableColumn prefWidth="75.0" text="C1" />
-    <TableColumn prefWidth="75.0" text="C2" />
-  </columns>
-</TableView>
+            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+            <TableView layoutY="35.0">
+                <columns>
+                  <TableColumn prefWidth="75.0" text="Element" />
+                  <TableColumn prefWidth="75.0" text="Eigenschaft" />
+                </columns>
+            </TableView>
           </children>
         </AnchorPane>
       </items>
