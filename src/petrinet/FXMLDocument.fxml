@@ -57,11 +57,11 @@
             <Button fx:id="redoButton" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
             <Button fx:id="undoButton" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
             <Separator orientation="VERTICAL" />
-            <Button mnemonicParsing="false" onAction="#handlePlace" text="Place" />
-            <Button mnemonicParsing="false" onAction="#handleTransition" style="-fx-graphic: url('http://icons.iconarchive.com/icons/visualpharm/ios7v2/24/Imagetools-Rectangle-icon.png');" text="" />
-            <Button mnemonicParsing="false" onAction="#handleTimedTransition" text="Timed Transition" />
+            <Button mnemonicParsing="false" onAction="#handlePlace" style="-fx-graphic: url('http://www.i2symbol.com/images/symbols/geometry/white_circle_u25CB_icon_24x24.png');" text=""/>
+            <Button mnemonicParsing="false" onAction="#handleTransition" style="-fx-graphic: url('http://www.i2symbol.com/force_download.php?file=images/symbols/geometry/white_vertical_rectangle_u25AF_icon_24x24.png');" text="" />
+            <Button mnemonicParsing="false" onAction="#handleTimedTransition" style="-fx-graphic: url('http://www.i2symbol.com/force_download.php?file=images/symbols/geometry/black_vertical_rectangle_u25AE_icon_24x24.png');" text="" />
             <Separator orientation="VERTICAL" />
-            <Button mnemonicParsing="false" onAction="#handleTimedTransition" text="Arrow" />
+            <Button mnemonicParsing="false" onAction="#handleTimedTransition" style="-fx-graphic: url('https://cdn1.iconfinder.com/data/icons/gnomeicontheme/24x24/stock/image/stock_draw-straight-connector-starts-with-arrow.png');" text="" />
             <Button mnemonicParsing="false" onAction="#handleTimedTransition" text="Inhibitor" />
           </items>
         </ToolBar>
