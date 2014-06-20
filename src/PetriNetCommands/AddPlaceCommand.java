@@ -7,7 +7,7 @@
 package PetriNetCommands;
 
 import CommandSystem.AbstractReversebleCommand;
-import CommandSystem.ComandProcessor;
+import CommandSystem.CommandProcessor;
 import javafx.scene.layout.AnchorPane;
 import petrinetelements.Place;
 
@@ -19,10 +19,11 @@ public class AddPlaceCommand extends AbstractReversebleCommand {
     AnchorPane a;
     Place p;
 
-    public AddPlaceCommand(String n, AnchorPane anchor, ComandProcessor c) {
+    public AddPlaceCommand(String n, AnchorPane anchor, CommandProcessor c) {
         super(n);
         a = anchor;
         p = new Place(100, 100, 30, a, c);
+        p.setTokens(2);
     }
 
     @Override

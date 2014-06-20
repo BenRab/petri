@@ -10,9 +10,15 @@ package CommandSystem;
  *
  * @author ben
  */
-public interface ReversebleComandIF extends ComandIF {
+public interface CommandIF {
     /**
-     * undo last Comand
+     * @return name
      */
-    public void undo();
+    public String getName();
+    
+    /**
+     * run the comand
+     */
+    public void execute();
+    
 }

@@ -14,15 +14,15 @@ import javafx.scene.control.MenuItem;
  *
  * @author ben
  */
-public class ComandProcessor {
-    private final Stack<ComandIF> undoStack;
-    private final Stack<ComandIF> redoStack;
+public class CommandProcessor {
+    private final Stack<CommandIF> undoStack;
+    private final Stack<CommandIF> redoStack;
     private final MenuItem undoMenu;
     private final MenuItem redoMenu;
     private final Button undoButton;
     private final Button redoButton;
     
-    public ComandProcessor(MenuItem u, MenuItem r, Button rB, Button uB) {
+    public CommandProcessor(MenuItem u, MenuItem r, Button rB, Button uB) {
         undoStack = new Stack<>();
         redoStack = new Stack<>();    
         
@@ -37,9 +37,9 @@ public class ComandProcessor {
         redoButton.setDisable(true);
     }
     
-    public void executeCommand(ComandIF c) {
+    public void executeCommand(CommandIF c) {
         c.execute();
-        if (c instanceof ReversebleComandIF) {
+        if (c instanceof ReversebleCommandIF) {
             undoStack.push(c);
         }
         setMenus();
@@ -47,9 +47,9 @@ public class ComandProcessor {
     
     public void undoLastCommand() {
         if (!undoStack.empty()) {
-            ComandIF c = undoStack.pop();
-            if (c instanceof ReversebleComandIF) {
-                ((ReversebleComandIF) c).undo();
+            CommandIF c = undoStack.pop();
+            if (c instanceof ReversebleCommandIF) {
+                ((ReversebleCommandIF) c).undo();
                 redoStack.push(c);
             }
         }
@@ -58,14 +58,14 @@ public class ComandProcessor {
     
     public void redoLastCommand() {
         if (!redoStack.empty()) {
-            ComandIF c = redoStack.pop();
+            CommandIF c = redoStack.pop();
             c.execute();
             undoStack.push(c);
         }
         setMenus();
     }
     
-    public void setCommandExecuted(ComandIF c) {
+    public void setCommandExecuted(CommandIF c) {
         undoStack.add(c);
     }
 

@@ -7,7 +7,7 @@
 package PetriNetCommands;
 
 import CommandSystem.AbstractReversebleCommand;
-import petrinetelements.PetriNetPane;
+import petrinetelements.AbstractPetriNetElement;
 
 /**
  *
@@ -18,9 +18,9 @@ public class DragAndDropCommand extends AbstractReversebleCommand {
     double prevY;
     double endedX;
     double endedY;
-    PetriNetPane petriNetElement;
+    AbstractPetriNetElement petriNetElement;
 
-    public DragAndDropCommand(PetriNetPane p, double x, double y) {
+    public DragAndDropCommand(AbstractPetriNetElement p, double x, double y) {
         super("Drag and Drop");
         petriNetElement = p;
         prevX = x;

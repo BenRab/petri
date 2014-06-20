@@ -8,9 +8,9 @@ package petrinet;
 
 import petrinetelements.Transition;
 import petrinetelements.TimedTransition;
-import petrinetelements.PetriNetPane;
-import CommandSystem.ComandIF;
-import CommandSystem.ComandProcessor;
+import petrinetelements.AbstractPetriNetElement;
+import CommandSystem.CommandIF;
+import CommandSystem.CommandProcessor;
 import PetriNetCommands.AddPlaceCommand;
 import PetriNetCommands.AddTimedTransition;
 import PetriNetCommands.AddTransitionCommand;
@@ -48,7 +48,7 @@ import javafx.stage.Stage;
  */
 public class FXMLDocumentController implements Initializable {
     
-    private ComandProcessor processor;
+    private CommandProcessor processor;
     
     private Label label;
     @FXML
@@ -80,15 +80,18 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        processor = new ComandProcessor(undoMenu, redoMenu, redoButton, undoButton);
+        processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         a.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 for (Node n : a.getChildren()) {
-                    if (n instanceof PetriNetPane) {
-                        PetriNetPane p = (PetriNetPane) n;
-                        if (p.isPointInElement(t.getX(), t.getY()));
-                        p.setSelected(false);
+                    if (n instanceof AbstractPetriNetElement) {
+                        AbstractPetriNetElement p = (AbstractPetriNetElement) n;
+                        if (p.isPointInElement(t.getX(), t.getY())) {
+                            p.setSelected(true);
+                        } else {
+                            p.setSelected(false);
+                        }
                     }
                 }
             }
@@ -197,19 +200,19 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handlePlace(ActionEvent event) {
-        ComandIF c = new AddPlaceCommand("fsd", a, processor);
+        CommandIF c = new AddPlaceCommand("fsd", a, processor);
         processor.executeCommand(c);
     }
 
     @FXML
     private void handleTransition(ActionEvent event) {
-        ComandIF c = new AddTransitionCommand(a, processor);
+        CommandIF c = new AddTransitionCommand(a, processor);
         processor.executeCommand(c);
     }
 
     @FXML
     private void handleTimedTransition(ActionEvent event) {
-        ComandIF c = new AddTimedTransition(a, processor);
+        CommandIF c = new AddTimedTransition(a, processor);
         processor.executeCommand(c);
     }
 

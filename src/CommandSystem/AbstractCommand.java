@@ -10,7 +10,7 @@ package CommandSystem;
  *
  * @author ben
  */
-public abstract class AbstractCommand implements ComandIF {
+public abstract class AbstractCommand implements CommandIF {
     final String Name;
     
     public AbstractCommand(final String n) {

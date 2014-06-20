@@ -10,7 +10,7 @@ package CommandSystem;
  *
  * @author ben
  */
-public abstract class AbstractReversebleCommand extends AbstractCommand implements ReversebleComandIF {
+public abstract class AbstractReversebleCommand extends AbstractCommand implements ReversebleCommandIF {
 
     public AbstractReversebleCommand(String n) {
         super(n);

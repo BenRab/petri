@@ -7,7 +7,7 @@
 package PetriNetCommands;
 
 import CommandSystem.AbstractReversebleCommand;
-import CommandSystem.ComandProcessor;
+import CommandSystem.CommandProcessor;
 import javafx.scene.layout.AnchorPane;
 import petrinetelements.TimedTransition;
 
@@ -20,8 +20,9 @@ public class AddTimedTransition extends AbstractReversebleCommand {
     TimedTransition t;
 
 
-    public AddTimedTransition(AnchorPane a, ComandProcessor c) {
+    public AddTimedTransition(AnchorPane anchor, CommandProcessor c) {
         super("Timed Transition");
+        a = anchor;
         t = new TimedTransition(100, 100, 25, 90, a, c);
     }
     

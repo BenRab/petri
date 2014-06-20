@@ -6,13 +6,14 @@
 
 package petrinetelements;
 
-import CommandSystem.ComandIF;
-import CommandSystem.ComandProcessor;
+import CommandSystem.CommandIF;
+import CommandSystem.CommandProcessor;
 import PetriNetCommands.DragAndDropCommand;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -26,18 +27,19 @@ import javafx.scene.shape.Shape;
  *
  * @author ben
  */
-public abstract class PetriNetPane extends Pane {
+public abstract class AbstractPetriNetElement extends Pane {
     boolean selected;
-    Shape shape;
+    protected Shape shape;
     AnchorPane anchor;
-    ComandProcessor processor;
+    CommandProcessor processor;
     private double dragDeltaY, dragDeltaX;
-    double x, y;
+    protected double x, y;
+    Label name;
     
     public final int RADIUS = 3;
     public final String COLOR = "PERU";
     
-    public PetriNetPane(final Shape s, Color p, AnchorPane a, ComandProcessor c) {
+    public AbstractPetriNetElement(final Shape s, Color p, AnchorPane a, CommandProcessor c) {
         shape = s;
         anchor = a;
         processor = c;
@@ -45,8 +47,32 @@ public abstract class PetriNetPane extends Pane {
         s.setStroke(Color.BLACK);
         setDragHandler(s, this);
         setContextMenu(s);
-        getChildren().addAll(s);
         selected = false;
+    }
+    
+    /**
+     * @return
+     */
+    public abstract Label getLabel();
+    
+    public Shape getShape() {
+        return shape;
+    }
+    
+    public double getX() {
+        return shape.getLayoutX();
+    }
+    
+    public double getY() {
+        return shape.getLayoutY();
+    }
+    
+    public void setName(String n) {
+        name.setText(n);
+    }
+    
+    public String getName() {
+        return name.getText();
     }
     
     public boolean isSelected() {
@@ -97,7 +123,7 @@ public abstract class PetriNetPane extends Pane {
         });
     }
     
-    private void setDragHandler( final Shape shape, final PetriNetPane p ) {  
+    private void setDragHandler( final Shape shape, final AbstractPetriNetElement p ) {  
         x = p.getLayoutX();
         y = p.getLayoutY();
         
@@ -127,7 +153,7 @@ public abstract class PetriNetPane extends Pane {
         shape.setOnMouseReleased( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
             setCursor( Cursor.HAND );
-            ComandIF c = new DragAndDropCommand(p, x, y);
+            CommandIF c = new DragAndDropCommand(p, x, y);
             processor.setCommandExecuted(c);
           }
         } );
