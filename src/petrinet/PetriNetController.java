@@ -10,7 +10,7 @@ import petrinetelements.AbstractPetriNetElement;
 import CommandSystem.CommandIF;
 import CommandSystem.CommandProcessor;
 import PetriNetCommands.AddPlaceCommand;
-import PetriNetCommands.AddTimedTransition;
+import PetriNetCommands.AddTimedTransitionCommand;
 import PetriNetCommands.AddTransitionCommand;
 import java.io.File;
 import java.io.IOException;
@@ -218,7 +218,7 @@ public class PetriNetController implements Initializable {
 
     @FXML
     private void handleTimedTransition(ActionEvent event) {
-        CommandIF c = new AddTimedTransition(new PetriNetPane(a, processor));
+        CommandIF c = new AddTimedTransitionCommand(new PetriNetPane(a, processor));
         processor.executeCommand(c);
     }
 

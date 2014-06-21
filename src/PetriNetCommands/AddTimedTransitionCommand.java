@@ -16,12 +16,12 @@ import petrinetelements.TimedTransition;
  *
  * @author ben
  */
-public class AddTimedTransition extends AbstractReversebleCommand {
+public class AddTimedTransitionCommand extends AbstractReversebleCommand {
     PetriNetPane pane;
     TimedTransition t;
 
 
-    public AddTimedTransition(PetriNetPane p) {
+    public AddTimedTransitionCommand(PetriNetPane p) {
         super("Timed Transition");
         pane = p;
         t = new TimedTransition(100, 100, 25, 90, p);
