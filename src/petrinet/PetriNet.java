@@ -20,7 +20,7 @@ public class PetriNet extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/petrinet/fxml/FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         

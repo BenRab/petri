@@ -157,7 +157,7 @@ public class PetriNetController implements Initializable {
     @FXML
     private void handlePreferences(ActionEvent event) throws IOException {
         Stage stage = new Stage(); 
-        Parent root = FXMLLoader.load(getClass().getResource("Preferences.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/petrinet/fxml/Preferences.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -237,7 +237,7 @@ public class PetriNetController implements Initializable {
     @FXML
     private void handleAbout(ActionEvent event) throws IOException {
         Stage stage = new Stage(); 
-        Parent root = FXMLLoader.load(getClass().getResource("About.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/petrinet/fxml/About.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -249,7 +249,7 @@ public class PetriNetController implements Initializable {
     @FXML
     private void handleHelp(ActionEvent event) throws IOException {
         Stage stage = new Stage(); 
-        Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/petrinet/fxml/Help.fxml"));
         
         Scene scene = new Scene(root);
         
