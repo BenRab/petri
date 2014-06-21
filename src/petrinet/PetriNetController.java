@@ -227,7 +227,15 @@ public class PetriNetController implements Initializable {
     }
 
     @FXML
-    private void handleHelp(ActionEvent event) {
+    private void handleHelp(ActionEvent event) throws IOException {
+        Stage stage = new Stage(); 
+        Parent root = FXMLLoader.load(getClass().getResource("Help.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        stage.setTitle("Petri Netz Editor");
+        stage.setScene(scene);
+        stage.show();
     }
 
     

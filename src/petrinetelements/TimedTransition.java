@@ -18,11 +18,18 @@ import javafx.scene.shape.Rectangle;
  */
 public class TimedTransition extends AbstractPetriNetElement {
     double layoutY, layoutX;
+    double width;
+    double height;
     
-    public TimedTransition(double x, double y, double width, double height, AnchorPane a, CommandProcessor c) {
-        super(new Rectangle(x, y, width, height), Color.BLACK, a, c);
+    public TimedTransition(double x, double y, double w, double h, AnchorPane a, CommandProcessor c) {
+        super(new Rectangle(x, y, w, h), Color.BLACK, a, c);
+        
+        layoutX = x;
+        layoutY = y;
+        this.width = w;
+        this.height = h;
         name = this.getLabel();
-        getChildren().addAll(this.getShape(), name);
+        getChildren().addAll(this.shape, name);
     }
 
     @Override
@@ -33,8 +40,8 @@ public class TimedTransition extends AbstractPetriNetElement {
     @Override
     public Label getLabel() {
         name = new Label("Timed Transition");
-        name.setLayoutX(layoutX - 0.75);
-        name.setLayoutY(layoutY - 1.75);    
+        name.setLayoutX(layoutX - width);
+        name.setLayoutY(layoutY - height * 0.25);    
         return name;
     }
 }

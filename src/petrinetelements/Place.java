@@ -31,7 +31,7 @@ public class Place extends AbstractPetriNetElement {
         
         r = radius;
         name = this.getLabel();
-        getChildren().addAll(this.getShape(), name);
+        getChildren().addAll(this.shape, name);
     }
 
     @Override

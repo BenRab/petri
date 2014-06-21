@@ -8,18 +8,14 @@ package petrinet;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author ben
  */
-public class PreferencesController implements Initializable {
-    @FXML
-    private AnchorPane asdasd;
+public class HelpController implements Initializable {
 
     /**
      * Initializes the controller class.

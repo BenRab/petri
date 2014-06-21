@@ -54,10 +54,7 @@ public abstract class AbstractPetriNetElement extends Pane {
      * @return
      */
     public abstract Label getLabel();
-    
-    public Shape getShape() {
-        return shape;
-    }
+
     
     public double getX() {
         return shape.getLayoutX();
