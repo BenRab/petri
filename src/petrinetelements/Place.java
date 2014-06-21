@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import petrinet.PetriNetPane;
 
 /**
  *
@@ -23,8 +24,8 @@ public class Place extends AbstractPetriNetElement {
     double layoutY, layoutX;
     double r;
     
-    public Place(double x, double y, double radius, AnchorPane a, CommandProcessor c) {
-        super(new Circle(x, y, radius), Color.WHITE, a, c);
+    public Place(double x, double y, double radius, PetriNetPane p) {
+        super(new Circle(x, y, radius), Color.WHITE, p);
         tokenSize = radius / 3;
         layoutX = x;
         layoutY = y;

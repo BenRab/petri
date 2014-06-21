@@ -9,6 +9,7 @@ package PetriNetCommands;
 import CommandSystem.AbstractReversebleCommand;
 import CommandSystem.CommandProcessor;
 import javafx.scene.layout.AnchorPane;
+import petrinet.PetriNetPane;
 import petrinetelements.Transition;
 
 /**
@@ -16,23 +17,22 @@ import petrinetelements.Transition;
  * @author ben
  */
 public class AddTransitionCommand extends AbstractReversebleCommand {
-
-    AnchorPane a;
+    PetriNetPane pane;
     Transition t;
 
-    public AddTransitionCommand(AnchorPane anchor, CommandProcessor c) {
+    public AddTransitionCommand(PetriNetPane p) {
         super("Transition");
-        a = anchor;
-        t = new Transition (100, 100, 20, 85, a, c);
+        pane = p;
+        t = new Transition (100, 100, 20, 85, p);
     }
     @Override
     public void execute() {
-        a.getChildren().addAll(t);
+        pane.getAnchor().getChildren().addAll(t);
     }
 
     @Override
     public void undo() {
-        a.getChildren().remove(t);
+        pane.getAnchor().getChildren().remove(t);
     }
     
 }

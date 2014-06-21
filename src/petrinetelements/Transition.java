@@ -11,25 +11,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import petrinet.PetriNetPane;
 
 /**
  *
  * @author ben
  */
-public class Transition extends AbstractPetriNetElement {
+public class Transition extends AbstractTransition {
 
-    public Transition(double x, double y, double width, double height, AnchorPane a, CommandProcessor c) {
-        super(new Rectangle(x, y, width, height), Color.WHITE, a, c);
+    public Transition(double x, double y, double width, double height, PetriNetPane p) {
+        super(new Rectangle(x, y, width, height), Color.WHITE, p);
     }
 
     @Override
-    public boolean isPointInElement(double x, double y) {
-        return false;
-    }
-
-    @Override
-    public Label getLabel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getName() {
+        return "Transition";
     }
     
 }

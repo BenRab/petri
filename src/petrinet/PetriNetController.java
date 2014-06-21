@@ -15,7 +15,9 @@ import PetriNetCommands.AddTransitionCommand;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -37,6 +39,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import petrinetelements.Place;
 
 /**
  *
@@ -76,9 +79,13 @@ public class PetriNetController implements Initializable {
     @FXML
     private Button arrowButton;
     
+    private ArrayList<PetriNetPane> panes;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
+        panes = new ArrayList<>();
+        panes.add(new PetriNetPane(a, processor));
         a.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
@@ -102,7 +109,12 @@ public class PetriNetController implements Initializable {
         //Stage stage = new Stage(); 
         //stage.setScene(new Scene(new Group(new Text(10,10, "my second window")))); 
         //stage.show();
-        tabs.getTabs().addAll(new Tab("New Tab"));
+        Tab t = new Tab("New Tab");
+
+        AnchorPane pane = new AnchorPane();
+        pane.getChildren().add(new Place(100, 100, 30, this.panes.get(0)));
+        t.setContent(pane);
+        tabs.getTabs().addAll(t);
         
     }
 
@@ -194,19 +206,19 @@ public class PetriNetController implements Initializable {
 
     @FXML
     private void handlePlace(ActionEvent event) {
-        CommandIF c = new AddPlaceCommand("fsd", a, processor);
+        CommandIF c = new AddPlaceCommand(new PetriNetPane(a, processor));
         processor.executeCommand(c);
     }
 
     @FXML
     private void handleTransition(ActionEvent event) {
-        CommandIF c = new AddTransitionCommand(a, processor);
+        CommandIF c = new AddTransitionCommand(new PetriNetPane(a, processor));
         processor.executeCommand(c);
     }
 
     @FXML
     private void handleTimedTransition(ActionEvent event) {
-        CommandIF c = new AddTimedTransition(a, processor);
+        CommandIF c = new AddTimedTransition(new PetriNetPane(a, processor));
         processor.executeCommand(c);
     }
 

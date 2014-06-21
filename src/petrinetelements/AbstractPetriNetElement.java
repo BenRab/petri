@@ -7,7 +7,6 @@
 package petrinetelements;
 
 import CommandSystem.CommandIF;
-import CommandSystem.CommandProcessor;
 import PetriNetCommands.DragAndDropCommand;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,11 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import petrinet.PetriNetPane;
 
 /**
  *
@@ -30,8 +28,7 @@ import javafx.scene.shape.Shape;
 public abstract class AbstractPetriNetElement extends Pane {
     boolean selected;
     protected Shape shape;
-    AnchorPane anchor;
-    CommandProcessor processor;
+    PetriNetPane pane;
     private double dragDeltaY, dragDeltaX;
     protected double x, y;
     Label name;
@@ -39,11 +36,10 @@ public abstract class AbstractPetriNetElement extends Pane {
     public final int RADIUS = 3;
     public final String COLOR = "PERU";
     
-    public AbstractPetriNetElement(final Shape s, Color p, AnchorPane a, CommandProcessor c) {
+    public AbstractPetriNetElement(final Shape s, Color col, PetriNetPane p) {
         shape = s;
-        anchor = a;
-        processor = c;
-        s.setFill(p);
+        pane = p;
+        s.setFill(col);
         s.setStroke(Color.BLACK);
         setDragHandler(s, this);
         setContextMenu(s);
@@ -103,7 +99,7 @@ public abstract class AbstractPetriNetElement extends Pane {
           @Override public void handle(MouseEvent event) {
             setSelected(true);
             if (MouseButton.SECONDARY.equals(event.getButton())) {
-              menu.show(anchor, event.getScreenX(), event.getScreenY());
+              menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());
             }  
           }
         });
@@ -140,7 +136,7 @@ public abstract class AbstractPetriNetElement extends Pane {
           @Override public void handle( MouseEvent mouseEvent ) {
             setCursor( Cursor.HAND );
             CommandIF c = new DragAndDropCommand(p, x, y);
-            processor.setCommandExecuted(c);
+            pane.getProcessor().setCommandExecuted(c);
           }
         } );
     }
