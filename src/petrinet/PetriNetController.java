@@ -6,8 +6,6 @@
 
 package petrinet;
 
-import petrinetelements.Transition;
-import petrinetelements.TimedTransition;
 import petrinetelements.AbstractPetriNetElement;
 import CommandSystem.CommandIF;
 import CommandSystem.CommandProcessor;
@@ -24,7 +22,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,7 +35,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -46,7 +42,7 @@ import javafx.stage.Stage;
  *
  * @author ben
  */
-public class FXMLDocumentController implements Initializable {
+public class PetriNetController implements Initializable {
     
     private CommandProcessor processor;
     
@@ -77,6 +73,8 @@ public class FXMLDocumentController implements Initializable {
     private Button redoButton;
     @FXML
     private Button undoButton;
+    @FXML
+    private Button arrowButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,7 +85,7 @@ public class FXMLDocumentController implements Initializable {
                 for (Node n : a.getChildren()) {
                     if (n instanceof AbstractPetriNetElement) {
                         AbstractPetriNetElement p = (AbstractPetriNetElement) n;
-                        if (p.isPointInElement(t.getX(), t.getY())) {
+                        if (p.isPointInElement(t.getSceneX(), t.getSceneY())) {
                             p.setSelected(true);
                         } else {
                             p.setSelected(false);
@@ -104,7 +102,7 @@ public class FXMLDocumentController implements Initializable {
         //Stage stage = new Stage(); 
         //stage.setScene(new Scene(new Group(new Text(10,10, "my second window")))); 
         //stage.show();
-        tabs.getTabs().addAll(new Tab("Test"));
+        tabs.getTabs().addAll(new Tab("New Tab"));
         
     }
 
@@ -195,10 +193,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void handleAcout(ActionEvent event) {
-    }
-
-    @FXML
     private void handlePlace(ActionEvent event) {
         CommandIF c = new AddPlaceCommand("fsd", a, processor);
         processor.executeCommand(c);
@@ -222,6 +216,18 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void selectNewTab(Event event) {
+    }
+
+    @FXML
+    private void handleNewArrow(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleAbout(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleHelp(ActionEvent event) {
     }
 
     

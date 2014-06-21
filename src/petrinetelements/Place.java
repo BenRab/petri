@@ -20,7 +20,7 @@ import javafx.scene.shape.Circle;
 public class Place extends AbstractPetriNetElement {   
     final double tokenSize;
     Stack<Circle> tokens = new Stack<>();
-    double layoutY,layoutX;
+    double layoutY, layoutX;
     double r;
     
     public Place(double x, double y, double radius, AnchorPane a, CommandProcessor c) {
@@ -36,13 +36,15 @@ public class Place extends AbstractPetriNetElement {
 
     @Override
     public boolean isPointInElement(double x, double y) {
-        double posX = this.getShape().getLayoutX() - r ;
-        double posY = this.getShape().getLayoutY() - r ;
-        double posX1 = this.getShape().getLayoutX() + r ;
-        double posY1 = this.getShape().getLayoutY() + r ;
+        double posX = this.getLayoutX()- r ;
+        double posY = this.getLayoutY() - r ;
+        double posX1 = this.getLayoutX() + r ;
+        double posY1 = this.getLayoutY()  + r ;
+        double x1 = x - this.getScene().getX();
+        double y1 = y - this.getScene().getY();
         
-        System.out.println(posX + " <  " + x + " < " + posX1);
-        System.out.println(posY + " <  " + y + " < " + posY1);
+        System.out.println(posX + " <  " + x1  + " < " + posX1);
+        System.out.println(posY + " <  " + y1 + " < " + posY1);
         return this.getX() - r < x && this.getY() - r < y && x < this.getX() + r && y < this.getY() + r;
     }
     
@@ -53,7 +55,10 @@ public class Place extends AbstractPetriNetElement {
     public void setTokens(int size) {
         deleteTokens();
         if (size == 1) {
-            
+            Circle token = new Circle(r / 6, Color.BLACK);
+            token.setLayoutX(layoutX - r * 0.2);
+            token.setLayoutY(layoutY - r * 0.2);
+            this.getChildren().addAll(token);
         } else if (size == 2) {
             Circle token = new Circle(r / 6, Color.BLACK);
             token.setLayoutX(layoutX - r * 0.2);

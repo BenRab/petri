@@ -90,27 +90,16 @@ public abstract class AbstractPetriNetElement extends Pane {
         }
     }
     
-    private Circle initCircle(Circle c, double x, double y, int type) {
-        c = new Circle(x, y, RADIUS);
-        c.setFill( Color.web( COLOR, 0.8 ) );
-        c.setStroke( Color.PERU );
-        c.setStrokeWidth( 2 );
-        c.setVisible(true);
-        //setDragHandler(c, type);
-        return c;
-    }
-    
-    
-    private void setContextMenu(Shape shape) {
-        final MenuItem resizeItem = new MenuItem("Resize");
-        resizeItem.setOnAction(new EventHandler<ActionEvent>() {
+    private void setContextMenu(final Shape shape) {
+        final MenuItem deleteItem = new MenuItem("Delete");
+        deleteItem.setOnAction(new EventHandler<ActionEvent>() {
           @Override public void handle(ActionEvent event) {
-            System.out.println("Resize requested");
+            shape.setVisible(false);
           }
         });
 
         final ContextMenu menu = new ContextMenu(
-          resizeItem
+          deleteItem
         );
 
         shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -135,7 +124,7 @@ public abstract class AbstractPetriNetElement extends Pane {
             dragDeltaY = getLayoutY() - mouseEvent.getSceneY();
           }
         } );
-
+        
         shape.setOnMouseDragged( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
             setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
