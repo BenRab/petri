@@ -25,14 +25,15 @@ import petrinet.PetriNetPane;
  *
  * @author ben
  */
-public abstract class AbstractPetriNetElement extends Pane {
+public abstract class AbstractPetriNetElement extends Pane implements PetriNetElement {
     boolean selected;
     protected Shape shape;
     PetriNetPane pane;
     private double dragDeltaY, dragDeltaX;
     protected double x, y;
     Label name;
-    
+    public Color color;
+        
     public final int RADIUS = 3;
     public final String COLOR = "PERU";
     
@@ -40,9 +41,10 @@ public abstract class AbstractPetriNetElement extends Pane {
         shape = s;
         pane = p;
         s.setFill(col);
+        color = col;
         s.setStroke(Color.BLACK);
         setDragHandler(s, this);
-        setContextMenu(s);
+        setContextMenu(s, this);
         selected = false;
     }
     
@@ -50,7 +52,6 @@ public abstract class AbstractPetriNetElement extends Pane {
      * @return
      */
     public abstract Label getLabel();
-
     
     public double getX() {
         return shape.getLayoutX();
@@ -83,7 +84,7 @@ public abstract class AbstractPetriNetElement extends Pane {
         }
     }
     
-    private void setContextMenu(final Shape shape) {
+    private void setContextMenu(final Shape shape, final PetriNetElement e) {
         final MenuItem deleteItem = new MenuItem("Delete");
         deleteItem.setOnAction(new EventHandler<ActionEvent>() {
           @Override public void handle(ActionEvent event) {
@@ -94,15 +95,40 @@ public abstract class AbstractPetriNetElement extends Pane {
         final ContextMenu menu = new ContextMenu(
           deleteItem
         );
+        
+        shape.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                if (pane.arrowModus()) {
+                    shape.setFill(Color.LIGHTGREEN);
+                }
+            }
+        });
+        
+        shape.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                if (pane.arrowModus()) {
+                    shape.setFill(color);
+                }
+            }
+        });
 
         shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
-          @Override public void handle(MouseEvent event) {
-            pane.deselectAllElements();
-            setSelected(true);
-            if (MouseButton.SECONDARY.equals(event.getButton())) {
-              menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());
-            }  
-          }
+            @Override public void handle(MouseEvent event) {
+                if (pane.arrowModus()) {
+                    Arrow a = new Arrow(e);
+                    a.setStartX(event.getX());
+                    a.setStartY(event.getY());
+                }
+                else {
+                    pane.deselectAllElements();
+                    setSelected(true);
+                    if (MouseButton.SECONDARY.equals(event.getButton())) {
+                      menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());
+                    }
+                }
+            }
         });
     }
     

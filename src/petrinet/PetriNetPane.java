@@ -19,9 +19,12 @@ public class PetriNetPane {
     AnchorPane pane;
     CommandProcessor processor;
     
+    boolean isArrowButtonPressed;
+    
     public PetriNetPane(AnchorPane p, CommandProcessor pr) {
         pane = p;
         processor = pr;
+        isArrowButtonPressed = false;
     }
     
     public AnchorPane getAnchor() {
@@ -30,6 +33,18 @@ public class PetriNetPane {
     
     public CommandProcessor getProcessor() {
         return processor;
+    }
+    
+    public boolean arrowModus() {
+        return isArrowButtonPressed;
+    }
+    
+    public void setArrowModus(boolean m) {
+        isArrowButtonPressed = m;
+    }
+    
+    public void add(Node n) {
+        pane.getChildren().add(n);
     }
     
     public void deselectAllElements() {

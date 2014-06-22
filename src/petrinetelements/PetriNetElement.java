@@ -6,17 +6,10 @@
 
 package petrinetelements;
 
-import javafx.scene.shape.Line;
-
 /**
  *
  * @author ben
  */
-public class Arrow extends Line {
-    PetriNetElement element;
-    
-    public Arrow(PetriNetElement e) {
-        element = e;
-    }
+public interface PetriNetElement {
     
 }

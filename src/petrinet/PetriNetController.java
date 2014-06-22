@@ -80,6 +80,8 @@ public class PetriNetController implements Initializable {
     @FXML
     private Button arrowButton;
     
+    PetriNetPane currentPane;
+    
     private ArrayList<PetriNetPane> panes;
     @FXML
     private TableView<?> elementTable;
@@ -88,7 +90,9 @@ public class PetriNetController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         panes = new ArrayList<>();
-        panes.add(new PetriNetPane(a, processor));
+        currentPane = new PetriNetPane(a, processor);
+        panes.add(currentPane);
+        
         //at the moment not included: DESELECTION ON CLICK ON FIELD
         /*a.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -210,19 +214,19 @@ public class PetriNetController implements Initializable {
 
     @FXML
     private void handlePlace(ActionEvent event) {
-        CommandIF c = new AddPlaceCommand(new PetriNetPane(a, processor));
+        CommandIF c = new AddPlaceCommand(currentPane);
         processor.executeCommand(c);
     }
 
     @FXML
     private void handleTransition(ActionEvent event) {
-        CommandIF c = new AddTransitionCommand(new PetriNetPane(a, processor));
+        CommandIF c = new AddTransitionCommand(currentPane);
         processor.executeCommand(c);
     }
 
     @FXML
     private void handleTimedTransition(ActionEvent event) {
-        CommandIF c = new AddTimedTransitionCommand(new PetriNetPane(a, processor));
+        CommandIF c = new AddTimedTransitionCommand(currentPane);
         processor.executeCommand(c);
     }
 
@@ -236,6 +240,14 @@ public class PetriNetController implements Initializable {
 
     @FXML
     private void handleNewArrow(ActionEvent event) {
+        System.out.println("asdas");
+        if (currentPane.arrowModus()) {
+            currentPane.setArrowModus(false);
+        } else {
+            currentPane.setArrowModus(true);
+        }
+        System.out.println(currentPane.arrowModus());
+        System.out.println(currentPane);
     }
 
     @FXML
