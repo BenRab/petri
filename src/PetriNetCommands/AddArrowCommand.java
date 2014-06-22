@@ -7,8 +7,8 @@
 package PetriNetCommands;
 
 import CommandSystem.AbstractReversebleCommand;
-import javafx.scene.paint.Color;
 import petrinet.PetriNetPane;
+import petrinetelements.AbstractPetriNetElement;
 import petrinetelements.Arrow;
 
 /**
@@ -18,24 +18,31 @@ import petrinetelements.Arrow;
 public class AddArrowCommand extends AbstractReversebleCommand{
     Arrow arrow;
     PetriNetPane pane;
+    AbstractPetriNetElement startElement;
+    AbstractPetriNetElement endElement;
 
-    public AddArrowCommand(PetriNetPane p, Arrow a) {
+    public AddArrowCommand(PetriNetPane p, Arrow a, AbstractPetriNetElement s, AbstractPetriNetElement e) {
         super("Arrow");
         pane = p;
         arrow = a;
+        startElement = s;
+        endElement = e;
     }
 
     @Override
     public void execute() {
-        arrow.setEndX(100);
-        arrow.setEndY(100);
+        System.out.println(arrow);
         arrow.setVisible(true);
+        endElement.addEndArrow(arrow);
+        startElement.addStartArrow(arrow);
         pane.add(arrow);
     }
 
     @Override
     public void undo() {
-        pane.delete(arrow);
+        endElement.deleteEndArrow(arrow);
+        startElement.deleteStartArrow(arrow);
+        arrow.setVisible(false);
     }
     
 }

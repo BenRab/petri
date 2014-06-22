@@ -6,7 +6,9 @@
 
 package petrinet;
 
+import CommandSystem.CommandIF;
 import CommandSystem.CommandProcessor;
+import PetriNetCommands.AddArrowCommand;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import petrinetelements.AbstractPetriNetElement;
@@ -53,6 +55,14 @@ public class PetriNetPane {
         startSetted = true;
     }
     
+    public void setEnd(double x, double y, AbstractPetriNetElement e) {
+        Arrow a = new Arrow(startX, startY, x, y);
+        System.out.println(a);
+        CommandIF c = new AddArrowCommand(this, a, startElement, e);
+        this.getProcessor().executeCommand(c);
+        startSetted = false;
+    }
+    
     public boolean startSetted() {
         return startSetted && isArrowButtonPressed;
     }
@@ -75,10 +85,6 @@ public class PetriNetPane {
     }
 
     public void delete(Arrow arrow) {
-        pane.getChildren().remove(arrow);
-    }
-
-    public Arrow setEnd(double x, double y, AbstractPetriNetElement e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        arrow.setVisible(false);
     }
 }

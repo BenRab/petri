@@ -36,7 +36,8 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
     protected double x, y;
     Label name;
     public Color color;
-    public ArrayList<Arrow> arrows;
+    public ArrayList<Arrow> startArrows;
+    public ArrayList<Arrow> endArrows;
         
     public final int RADIUS = 3;
     public final String COLOR = "PERU";
@@ -50,7 +51,8 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         setDragHandler(s, this);
         setContextMenu(s, this);
         selected = false;
-        arrows = new ArrayList<>();
+        startArrows = new ArrayList<>();
+        endArrows = new ArrayList<>();
     }
     
     public AbstractPetriNetElement copy () {
@@ -153,12 +155,20 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         });
     }
     
-    public void addArrow(Arrow a) {
-        arrows.add(a);
+    public void addStartArrow(Arrow a) {
+        startArrows.add(a);
     }
     
-    public void deleteArrow(Arrow a) {
-        arrows.remove(a);
+    public void deleteStartArrow(Arrow a) {
+        startArrows.remove(a);
+    }
+    
+    public void addEndArrow(Arrow a) {
+        endArrows.add(a);
+    }
+    
+    public void deleteEndArrow(Arrow a) {
+        endArrows.remove(a);
     }
     
     private void setDragHandler( final Shape shape, final AbstractPetriNetElement p ) {  

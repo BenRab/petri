@@ -27,10 +27,6 @@ public class Arrow extends Pane {
         getChildren().add(line);
     }
     
-    public void draw() {
-        
-    }
-    
     public void setStartX(double x) {
         line.setStartX(x);
     }
@@ -47,7 +43,4 @@ public class Arrow extends Pane {
         line.setEndY(y);
     }
     
-    public void setEndElement(double endX, double endY) {
-        
-    }
 }
