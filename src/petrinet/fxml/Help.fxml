@@ -10,30 +10,93 @@
    <children>
        <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
      <tabs>
-       <Tab text="Allgemein">
+       <Tab text="Petrinetze">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="600.0">
                      <children>
                         <ScrollPane layoutX="-2.0" layoutY="-1.0" prefHeight="325.0" prefWidth="600.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                              <AnchorPane prefHeight="325.0" prefWidth="587.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="30.0" prefHeight="295.0" prefWidth="520.0" text="Petrinetze sind ein Werkzeug, um Abläufe darzustellen. Sie bestehen aus Plätzen und Transitionen, die durch Pfeile verbunden sind. Letztere geben die Bewegunsrichtung vor. &#10; &#10;Um mehr über die einzelnen Elemente und ihre Anwendung in diesem Programm zu lernen, wählen sie bitte die entsprechenden Tabs am oberen Rand des Fensters aus. " textAlignment="JUSTIFY" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
+                                 </children></AnchorPane>
                            </content></ScrollPane>
                         <Button fx:id="HelpCloseButton" layoutX="274.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Close" />
                      </children></AnchorPane>
          </content>
        </Tab>
-       <Tab text="Elemente">
-         <content>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab text="Platz">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="600.0">
                      <children>
-                        <ScrollPane layoutX="167.0" layoutY="68.0" prefHeight="325.0" prefWidth="600.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane layoutX="-2.0" layoutY="-1.0" prefHeight="325.0" prefWidth="600.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                           </content></ScrollPane>
-                        <Button fx:id="HelpCloseButton2" layoutX="274.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Close" />
-                     </children></AnchorPane>
-         </content>
-       </Tab>
+                              <AnchorPane prefHeight="325.0" prefWidth="587.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="30.0" prefHeight="295.0" prefWidth="520.0" text="Plätze sind eines der beiden Hauptelemente. Sie stellen Zustände innerhalb eines Prozesses dar. &#10;&#10;Plätze können Tokens enthalten. &#10;&#10;Sie können einen Platz hinzufügen, in dem sie in der Werkzeugleiste auf den Kreis klicken.&#10;" textAlignment="JUSTIFY" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                        <Button fx:id="HelpCloseButton1" layoutX="274.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Close" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Token">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="600.0">
+                     <children>
+                        <ScrollPane layoutX="-2.0" layoutY="-1.0" prefHeight="325.0" prefWidth="600.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane prefHeight="325.0" prefWidth="587.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="30.0" prefHeight="295.0" prefWidth="520.0" text="Tokens können nur in Plätzen existieren. &#10;&#10;Um einem Platz eine Anzahl Tokens zuzuweisen, wählen sie den Platz per Mausklick aus und erhöhen oder verringern sie im rechten Bereich die Anzahl der Tokens " textAlignment="JUSTIFY" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                        <Button fx:id="HelpCloseButton12" layoutX="274.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Close" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Transition">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="600.0">
+                     <children>
+                        <ScrollPane layoutX="-2.0" layoutY="-1.0" prefHeight="325.0" prefWidth="600.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane prefHeight="325.0" prefWidth="587.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="30.0" prefHeight="295.0" prefWidth="520.0" text="Transitionen stellen die Übergänge zwischen Zuständen dar.  Diese Übergänge werden automatisch aktiviert, wenn bestimmte Voraussetzungen getroffen sind. Im einfachsten Fall wird eine Transition aktiviert, sobald alle Plätze, die mit einem Pfeil auf die Transition weisen, einen Token besitzen.&#10;&#10;Es besteht die Möglichkeit, mehr als einen Token pro Platz zu verlangen, damit eine Transition aktiviert werden kann.&#10;&#10;Es gibt zwei Arten von Transitionen.  Wenn sie Transitionen wünschen, die sofort feuern, wenn die Bedingungen erfüllt sind, wählen sie in der Werkzeugleiste das schwarze gefüllte Rechteck aus.&#10;Sollten sie jedoch wollen, dass die Transition zu einem zufälligen Zeitpunkt feuert, während die Bedingungen erfüllt sind, so wählen sie das unausgefüllt Rechteck aus.&#10;" textAlignment="JUSTIFY" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                        <Button fx:id="HelpCloseButton11" layoutX="274.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Close" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Pfeile">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="600.0">
+                     <children>
+                        <ScrollPane layoutX="-2.0" layoutY="-1.0" prefHeight="325.0" prefWidth="600.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane prefHeight="325.0" prefWidth="587.0">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="30.0" prefHeight="295.0" prefWidth="520.0" text="Pfeile sind die Verbindung zwischen Plätzen und Transitionen. Pfeile zwischen zwei Plätzen oder zwischen zwei Transitionen zu ziehen, ist nicht möglich, da die Notation das nicht erlaubt.&#10;&#10;Zeigt ein Pfeil von einem Platz auf eine Transition, so wird diese aktiviert (sie feuert), sobald der Platz die geforderte Anzahl an Tokens enthält. Daraufhin werden die Tokens aus dem Platz gelöscht. Außerdem wird eine gewisse Anzahl neuer Tokens in allen Plätzen erzeugt, auf die ein Pfeil von der aktivierten Transition aus zeigt.&#10;" textAlignment="JUSTIFY" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                        <Button fx:id="HelpCloseButton111" layoutX="274.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Close" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
      </tabs>
    </TabPane>
    </children>
