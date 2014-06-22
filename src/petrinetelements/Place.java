@@ -123,8 +123,10 @@ public class Place extends AbstractPetriNetElement {
         
         this.pane.getDetails().getChildren().clear();
         this.pane.getDetails().add(lName, 0, 0);
-        this.pane.getDetails().add(tName, 0,1);
-        this.pane.getDetails().add(lTokens, 1, 0);
+        this.pane.getDetails().add(tName, 1, 0);
+        this.pane.getDetails().add(lTokens, 0, 1);
         this.pane.getDetails().add(tTokens, 1, 1);
+        
+        this.pane.getHelpLabel().setText("Plätze sind eines der beiden Hauptelemente. \n Sie stellen Zustände innerhalb eines Prozesses dar. \n Plätze können Tokens enthalten. \n Sie können einen Platz hinzufügen, \n in dem sie in der Werkzeugleiste auf den Kreis klicken.");
     }
 }

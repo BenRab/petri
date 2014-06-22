@@ -79,6 +79,8 @@ public class PetriNetController implements Initializable {
     private Label datails;
     @FXML
     private GridPane dets;
+    @FXML
+    private Label help;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,7 +89,7 @@ public class PetriNetController implements Initializable {
         processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         panes = new ArrayList<>();
         copiedElements = new ArrayList<>();
-        currentPane = new PetriNetPane(a, processor, dets);
+        currentPane = new PetriNetPane(a, processor, dets, help);
         panes.add(currentPane);
                
         //at the moment not included: DESELECTION ON CLICK ON FIELD

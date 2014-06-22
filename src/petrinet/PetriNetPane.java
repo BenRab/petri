@@ -11,6 +11,7 @@ import CommandSystem.CommandProcessor;
 import PetriNetCommands.AddArrowCommand;
 import java.util.ArrayList;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import petrinetelements.AbstractPetriNetElement;
@@ -34,8 +35,9 @@ public class PetriNetPane {
     boolean isArrowButtonPressed;
     
     GridPane details;
+    Label help;
     
-    public PetriNetPane(AnchorPane p, CommandProcessor pr, GridPane d) {
+    public PetriNetPane(AnchorPane p, CommandProcessor pr, GridPane d, Label h) {
         pane = p;
         processor = pr;
         isArrowButtonPressed = false;
@@ -44,6 +46,7 @@ public class PetriNetPane {
         selectedElements = new ArrayList<>();
         
         details = d;
+        help = h;
     }
     
     public AnchorPane getAnchor() {
@@ -119,5 +122,9 @@ public class PetriNetPane {
     
     public GridPane getDetails() {
         return details;
+    }
+    
+    public Label getHelpLabel() {
+        return help;
     }
 }

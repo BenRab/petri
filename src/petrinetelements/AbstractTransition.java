@@ -25,9 +25,9 @@ abstract public class AbstractTransition extends AbstractPetriNetElement {
     public AbstractTransition(Rectangle r, Color col, PetriNetPane p) {
         super(r, col, p);
         rectangle = r;
-        name = this.getLabel();
+         name = new Label(getName());
+
         getChildren().addAll(this.shape, name);
-        name = new Label(getName());
         name.setLayoutX(rectangle.getX() - rectangle.getWidth());
         name.setLayoutY(rectangle.getY() - 0.25 * rectangle.getHeight());  
     }
