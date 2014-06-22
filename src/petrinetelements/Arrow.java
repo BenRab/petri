@@ -6,25 +6,48 @@
 
 package petrinetelements;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.LineBuilder;
 
 /**
  *
  * @author ben
  */
-public class Arrow extends Line {
-    PetriNetElement startElement;
-    PetriNetElement endElement;
+public class Arrow extends Pane {
+    Line line;
     
-    public Arrow(PetriNetElement start) {
-        startElement = start;
+    public Arrow(double startX, double startY, double endX, double endY) {
+        line = LineBuilder.create()
+            .startX(startX)
+            .startY(startY)
+            .endX(endX)
+            .endY(endY)
+            .build();
+        getChildren().add(line);
     }
     
-    public PetriNetElement getStartElement() {
-        return startElement;
+    public void draw() {
+        
     }
     
-    public void setEndElement() {
+    public void setStartX(double x) {
+        line.setStartX(x);
+    }
+    
+    public void setStartY(double y) {
+        line.setStartY(y);
+    }
+    
+    public void setEndX(double x) {
+        line.setEndX(x);
+    }
+    
+    public void setEndY(double y) {
+        line.setEndY(y);
+    }
+    
+    public void setEndElement(double endX, double endY) {
         
     }
 }

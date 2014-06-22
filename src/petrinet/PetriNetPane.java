@@ -19,6 +19,11 @@ import petrinetelements.Arrow;
 public class PetriNetPane {
     AnchorPane pane;
     CommandProcessor processor;
+        
+    double startX;
+    double startY;
+    boolean startSetted;
+    AbstractPetriNetElement startElement;
     
     boolean isArrowButtonPressed;
     
@@ -26,6 +31,7 @@ public class PetriNetPane {
         pane = p;
         processor = pr;
         isArrowButtonPressed = false;
+        startSetted = false;
     }
     
     public AnchorPane getAnchor() {
@@ -38,6 +44,17 @@ public class PetriNetPane {
     
     public boolean arrowModus() {
         return isArrowButtonPressed;
+    }
+    
+    public void setStart(double x, double y, AbstractPetriNetElement e) {
+        startX = x;
+        startY = y;
+        startElement = e;
+        startSetted = true;
+    }
+    
+    public boolean startSetted() {
+        return startSetted && isArrowButtonPressed;
     }
     
     public void setArrowModus(boolean m) {
@@ -59,5 +76,9 @@ public class PetriNetPane {
 
     public void delete(Arrow arrow) {
         pane.getChildren().remove(arrow);
+    }
+
+    public Arrow setEnd(double x, double y, AbstractPetriNetElement e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

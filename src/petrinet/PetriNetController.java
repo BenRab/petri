@@ -34,9 +34,12 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.LineBuilder;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import petrinetelements.Arrow;
 import petrinetelements.PetriNetElement;
 import petrinetelements.Place;
 
@@ -93,6 +96,9 @@ public class PetriNetController implements Initializable {
         copiedElements = new ArrayList<>();
         currentPane = new PetriNetPane(a, processor);
         panes.add(currentPane);
+        
+        Arrow a = new Arrow(0,0,100,100);
+        currentPane.add(a);
         
         //at the moment not included: DESELECTION ON CLICK ON FIELD
         /*a.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -283,8 +289,6 @@ public class PetriNetController implements Initializable {
         } else {
             currentPane.setArrowModus(true);
         }
-        System.out.println(currentPane.arrowModus());
-        System.out.println(currentPane);
     }
 
     @FXML
@@ -310,6 +314,4 @@ public class PetriNetController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-    
 }

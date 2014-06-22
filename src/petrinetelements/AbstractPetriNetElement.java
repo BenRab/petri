@@ -9,6 +9,7 @@ package petrinetelements;
 import CommandSystem.CommandIF;
 import PetriNetCommands.AddArrowCommand;
 import PetriNetCommands.DragAndDropCommand;
+import java.awt.Point;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,6 +50,7 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         setDragHandler(s, this);
         setContextMenu(s, this);
         selected = false;
+        arrows = new ArrayList<>();
     }
     
     public AbstractPetriNetElement copy () {
@@ -97,7 +99,7 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         }
     }
     
-    private void setContextMenu(final Shape shape, final PetriNetElement e) {
+    private void setContextMenu(final Shape shape, final AbstractPetriNetElement e) {
         final MenuItem deleteItem = new MenuItem("Delete");
         deleteItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
@@ -130,12 +132,15 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
                 if (pane.arrowModus()) {
-                    Arrow a = new Arrow(e);
-                    a.setStartX(event.getX());
-                    a.setStartY(event.getY());
-                    arrows.add(a);
-                    CommandIF c = new AddArrowCommand(pane, a);
-                    pane.getProcessor().setCommandExecuted(c);
+                    if (pane.startSetted()) {
+                        pane.setEnd(event.getX(), event.getY(), e);
+                    }
+                    else {
+                        pane.setStart(event.getX(), event.getY(), e);
+                    }
+
+                   // CommandIF c = new AddArrowCommand(pane, a);
+                   // pane.getProcessor().setCommandExecuted(c);
                 }
                 else {
                     pane.deselectAllElements();
@@ -146,6 +151,14 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
                 }
             }
         });
+    }
+    
+    public void addArrow(Arrow a) {
+        arrows.add(a);
+    }
+    
+    public void deleteArrow(Arrow a) {
+        arrows.remove(a);
     }
     
     private void setDragHandler( final Shape shape, final AbstractPetriNetElement p ) {  
