@@ -109,7 +109,7 @@
                                     <GridPane layoutX="63.0" prefHeight="323.0" prefWidth="463.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label text="Darstellung" />
-                                          <ComboBox prefWidth="150.0" promptText="Bis zu 3 als Punkte" value="1" visibleRowCount="3" GridPane.columnIndex="1">
+                                          <ComboBox prefWidth="150.0" promptText="Bis zu 3 als Punkte" value="Bis zu 3 als Punkte" visibleRowCount="3" GridPane.columnIndex="1">
                                              <items>
                                                 <FXCollections fx:factory="observableArrayList">
                                                    <String fx:value="Immer als Zahl" />
