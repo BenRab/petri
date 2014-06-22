@@ -10,7 +10,6 @@ import java.util.Stack;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -25,7 +24,7 @@ public class Place extends AbstractPetriNetElement {
     Stack<Circle> tokens = new Stack<>();
     double layoutY, layoutX;
     double r;
-    Label name = new Label("Place");;
+    Label name = new Label("Place");
     
     public Place(double x, double y, double radius, PetriNetPane p) {
         super(new Circle(x, y, radius), Color.WHITE, p);
@@ -64,6 +63,7 @@ public class Place extends AbstractPetriNetElement {
             token.setLayoutX(layoutX - r * 0.2);
             token.setLayoutY(layoutY - r * 0.2);
             this.getChildren().addAll(token);
+            tokens.push(token);
         } else if (size == 2) {
             Circle token = new Circle(r / 6, Color.BLACK);
             token.setLayoutX(layoutX - r * 0.2);
@@ -107,22 +107,24 @@ public class Place extends AbstractPetriNetElement {
         Label lTokens = new Label("Tokens");
         
         final TextField tName = new TextField();
-        tName.setOnInputMethodTextChanged(new EventHandler<InputMethodEvent>() {
-               @Override
-               public void handle(InputMethodEvent inputMethodEvent) {
-                    System.out.println("Text changed");
-               }
-          });
-        TextField tTokens = new TextField();
+        tName.setText(name.getText());
         tName.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent t) {
                     getLabel().setText(tName.getText());
-                    System.out.println(tName.getText());
             }
           });
-        //tName.setOnKeyReleased(x);
+        
+        final TextField tTokens = new TextField();
+        tTokens.setText(String.valueOf(tokens.size()));
+        tTokens.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent t) {
+                    setTokens(Integer.parseInt(tTokens.getText()));
+            }});
+        
         this.pane.getDetails().getChildren().clear();
         this.pane.getDetails().add(lName, 0, 0);
-        this.pane.getDetails().add(tName, 1, 0);
+        this.pane.getDetails().add(tName, 0,1);
+        this.pane.getDetails().add(lTokens, 1, 0);
+        this.pane.getDetails().add(tTokens, 1, 1);
     }
 }

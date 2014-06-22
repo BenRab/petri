@@ -22,7 +22,6 @@ public class AddPlaceCommand extends AbstractReversebleCommand {
         super("Place");
         pane = pa;
         p = new Place(100, 100, 30, pa);
-        p.setTokens(2);
     }
 
     @Override
