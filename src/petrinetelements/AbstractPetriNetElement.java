@@ -7,7 +7,9 @@
 package petrinetelements;
 
 import CommandSystem.CommandIF;
+import PetriNetCommands.AddArrowCommand;
 import PetriNetCommands.DragAndDropCommand;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -33,6 +35,7 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
     protected double x, y;
     Label name;
     public Color color;
+    public ArrayList<Arrow> arrows;
         
     public final int RADIUS = 3;
     public final String COLOR = "PERU";
@@ -124,12 +127,15 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
                     Arrow a = new Arrow(e);
                     a.setStartX(event.getX());
                     a.setStartY(event.getY());
+                    arrows.add(a);
+                    CommandIF c = new AddArrowCommand(pane, a);
+                    pane.getProcessor().setCommandExecuted(c);
                 }
                 else {
                     pane.deselectAllElements();
                     setSelected(true);
                     if (MouseButton.SECONDARY.equals(event.getButton())) {
-                      menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());
+                        menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());
                     }
                 }
             }
@@ -142,32 +148,40 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         
         shape.setOnMousePressed( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            x = p.getLayoutX();
-            y = p.getLayoutY();
-            dragDeltaX = getLayoutX()- mouseEvent.getSceneX();
-            dragDeltaY = getLayoutY() - mouseEvent.getSceneY();
+              if (!pane.arrowModus()) {
+                  x = p.getLayoutX();
+                  y = p.getLayoutY();
+                  dragDeltaX = getLayoutX()- mouseEvent.getSceneX();
+                  dragDeltaY = getLayoutY() - mouseEvent.getSceneY();
+              }
           }
         } );
         
         shape.setOnMouseDragged( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
-            setLayoutY( mouseEvent.getSceneY() + dragDeltaY );
-            setCursor( Cursor.MOVE );
+              if (!pane.arrowModus()) {
+                  setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
+                  setLayoutY( mouseEvent.getSceneY() + dragDeltaY );
+                  setCursor( Cursor.MOVE );
+              }
           }
         } );
 
         shape.setOnMouseEntered( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            setCursor( Cursor.HAND );
+              if (!pane.arrowModus()) {
+                  setCursor( Cursor.HAND );
+              }
           }
         } );
 
         shape.setOnMouseReleased( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
-            setCursor( Cursor.HAND );
-            CommandIF c = new DragAndDropCommand(p, x, y);
-            pane.getProcessor().setCommandExecuted(c);
+              if (!pane.arrowModus()) {
+                  setCursor( Cursor.HAND );
+                  CommandIF c = new DragAndDropCommand(p, x, y);
+                  pane.getProcessor().setCommandExecuted(c);
+              }
           }
         } );
     }

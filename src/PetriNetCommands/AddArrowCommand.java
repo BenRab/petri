@@ -8,31 +8,30 @@ package PetriNetCommands;
 
 import CommandSystem.AbstractReversebleCommand;
 import petrinet.PetriNetPane;
-import petrinetelements.Place;
+import petrinetelements.Arrow;
 
 /**
  *
  * @author ben
  */
-public class AddPlaceCommand extends AbstractReversebleCommand {
-    Place p;
+public class AddArrowCommand extends AbstractReversebleCommand{
+    Arrow arrow;
     PetriNetPane pane;
 
-    public AddPlaceCommand(PetriNetPane pa) {
-        super("Place");
-        pane = pa;
-        p = new Place(100, 100, 30, pa);
-        p.setTokens(2);
+    public AddArrowCommand(PetriNetPane p, Arrow a) {
+        super("Arrow");
+        pane = p;
+        arrow = a;
     }
 
     @Override
     public void execute() {
-        pane.getAnchor().getChildren().addAll(p);    
+        pane.add(arrow);
     }
 
     @Override
     public void undo() {
-        pane.getAnchor().getChildren().remove(p);
+        pane.delete(arrow);
     }
     
 }

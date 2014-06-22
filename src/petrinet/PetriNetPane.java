@@ -10,6 +10,7 @@ import CommandSystem.CommandProcessor;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import petrinetelements.AbstractPetriNetElement;
+import petrinetelements.Arrow;
 
 /**
  *
@@ -54,5 +55,9 @@ public class PetriNetPane {
                 e.setSelected(false);
             }
         }
+    }
+
+    public void delete(Arrow arrow) {
+        pane.getChildren().remove(arrow);
     }
 }
