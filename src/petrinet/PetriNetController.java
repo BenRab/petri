@@ -17,10 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Stack;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,12 +32,12 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import petrinetelements.PetriNetElement;
 import petrinetelements.Place;
 
 /**
@@ -82,6 +80,8 @@ public class PetriNetController implements Initializable {
     
     PetriNetPane currentPane;
     
+    private ArrayList<AbstractPetriNetElement> copiedElements;
+    
     private ArrayList<PetriNetPane> panes;
     @FXML
     private TableView<?> elementTable;
@@ -90,6 +90,7 @@ public class PetriNetController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         panes = new ArrayList<>();
+        copiedElements = new ArrayList<>();
         currentPane = new PetriNetPane(a, processor);
         panes.add(currentPane);
         
@@ -190,26 +191,62 @@ public class PetriNetController implements Initializable {
 
     @FXML
     private void handleCut(ActionEvent event) {
+        for (AbstractPetriNetElement e : copiedElements) {
+            e.setVisible(false);
+        }
     }
 
     @FXML
     private void handleCopy(ActionEvent event) {
+        copiedElements.clear();
+        for (Node n : currentPane.getAnchor().getChildren()) {
+            if (n instanceof AbstractPetriNetElement) {
+                AbstractPetriNetElement e = (AbstractPetriNetElement) n;
+                if (e.isSelected()) {
+                    copiedElements.add(e);
+                }
+            }
+        }
     }
 
     @FXML
     private void handlePast(ActionEvent event) {
+        for (AbstractPetriNetElement e : copiedElements) {
+            AbstractPetriNetElement copied = e.copy();
+            currentPane.add(copied);
+        }
     }
 
     @FXML
     private void handleDelete(ActionEvent event) {
+        for (Node n : currentPane.getAnchor().getChildren()) {
+            if (n instanceof PetriNetElement) {
+                PetriNetElement e = (PetriNetElement) n;
+                if (e.isSelected()) {
+                    e.setVisible(false);
+                }
+            }
+        }
     }
 
     @FXML
     private void handleSelectAll(ActionEvent event) {
+        for (Node n : currentPane.getAnchor().getChildren()) {
+            if (n instanceof PetriNetElement) {
+                PetriNetElement e = (PetriNetElement) n;
+                e.setSelected(true);
+            }
+        }
     }
 
     @FXML
     private void handleUnselectAll(ActionEvent event) {
+        for (Node n : currentPane.getAnchor().getChildren()) {
+            if (n instanceof PetriNetElement) {
+                PetriNetElement e = (PetriNetElement) n;
+                e.setSelected(false);
+            }
+        }
     }
 
     @FXML

@@ -21,5 +21,7 @@ public interface PetriNetElement {
     
     public void setSelected(boolean b);
     
+    public void setVisible(boolean b);
+    
     public boolean isPointInElement(double x, double y);
 }

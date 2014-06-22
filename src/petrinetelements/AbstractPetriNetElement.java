@@ -51,6 +51,12 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         selected = false;
     }
     
+    public AbstractPetriNetElement copy () {
+        //TODO
+        //return new AbstractPetriNetElement(shape.);
+        return null;
+    }
+    
     /**
      * @return
      */
@@ -94,13 +100,13 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
     private void setContextMenu(final Shape shape, final PetriNetElement e) {
         final MenuItem deleteItem = new MenuItem("Delete");
         deleteItem.setOnAction(new EventHandler<ActionEvent>() {
-          @Override public void handle(ActionEvent event) {
-            shape.setVisible(false);
-          }
+            @Override public void handle(ActionEvent event) {
+                shape.setVisible(false);
+            }
         });
 
         final ContextMenu menu = new ContextMenu(
-          deleteItem
+            deleteItem
         );
         
         shape.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -134,9 +140,9 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
                 else {
                     pane.deselectAllElements();
                     setSelected(true);
-                    if (MouseButton.SECONDARY.equals(event.getButton())) {
-                        menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());
-                    }
+                }
+                if (MouseButton.SECONDARY.equals(event.getButton())) {
+                    menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());
                 }
             }
         });
