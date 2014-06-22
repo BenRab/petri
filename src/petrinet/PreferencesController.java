@@ -8,9 +8,12 @@ package petrinet;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -20,6 +23,10 @@ import javafx.scene.layout.AnchorPane;
 public class PreferencesController implements Initializable {
     @FXML
     private AnchorPane asdasd;
+    @FXML
+    private Button closePrefButton1;
+    @FXML
+    private Button closePrefButton2;
 
     /**
      * Initializes the controller class.
@@ -28,5 +35,11 @@ public class PreferencesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void closePref(ActionEvent event) {
+        Stage stage = (Stage) closePrefButton1.getScene().getWindow();
+        stage.close();
+    }
     
 }
