@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import petrinet.PetriNetController;
 import petrinet.PetriNetPane;
 
 /**
@@ -109,16 +110,34 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
     
     private void setContextMenu(final Shape shape, final AbstractPetriNetElement e) {
         final MenuItem deleteItem = new MenuItem("Delete");
+        final MenuItem copyItem = new MenuItem("Copy");
+        final MenuItem cutItem = new MenuItem("Cut");
         deleteItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
-                shape.setVisible(false);
+                PetriNetController p = new PetriNetController();
+                p.handleDelete(event);
             }
         });
+        
+        copyItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                PetriNetController p = new PetriNetController();
+                p.handleCopy(event);
+            }
+        });
+        
+        cutItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent event) {
+                PetriNetController p = new PetriNetController();
+                p.handleCut(event);
+            }
+        });
+        
 
         final ContextMenu menu = new ContextMenu(
             deleteItem
         );
-        
+                
         e.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
@@ -145,9 +164,11 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
             @Override public void handle(MouseEvent event) {
                 if (pane.arrowModus()) {
                     if (pane.startSetted()) {
-                        pane.setEnd(e.getLayoutX() + shape.getBaselineOffset(), e.getLayoutY() + shape.getBaselineOffset(), e);
+                        pane.setEnd(e.getLayoutX() + shape.getBaselineOffset() + getCenterOffsetX(), 
+                                e.getLayoutY() + shape.getBaselineOffset() + getCenterOffsetY(), e);
                     } else {
-                        pane.setStart(e.getLayoutX() + shape.getBaselineOffset(), e.getLayoutY() + shape.getBaselineOffset(), e);
+                        pane.setStart(e.getLayoutX() + shape.getBaselineOffset() + getCenterOffsetX(),
+                                e.getLayoutY() + shape.getBaselineOffset() + + getCenterOffsetY(), e);
                     }
                 } else {
                     pane.deselectAllElements();

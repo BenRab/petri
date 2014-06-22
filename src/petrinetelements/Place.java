@@ -92,11 +92,11 @@ public class Place extends AbstractPetriNetElement {
 
     @Override
     public double getCenterOffsetX() {
-        return this.RADIUS;
+        return this.r;
     }
 
     @Override
     public double getCenterOffsetY() {
-        return this.RADIUS;
+        return this.r;
     }
 }
