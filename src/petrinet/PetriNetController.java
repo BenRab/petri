@@ -173,7 +173,7 @@ public class PetriNetController implements Initializable {
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Petri Netz Editor");
+        stage.setTitle("Optionen");
         stage.setScene(scene);
         stage.show();
     }
