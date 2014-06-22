@@ -9,6 +9,7 @@ package petrinet;
 import CommandSystem.CommandIF;
 import CommandSystem.CommandProcessor;
 import PetriNetCommands.AddArrowCommand;
+import java.util.ArrayList;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import petrinetelements.AbstractPetriNetElement;
@@ -27,6 +28,8 @@ public class PetriNetPane {
     boolean startSetted;
     AbstractPetriNetElement startElement;
     
+    private ArrayList<AbstractPetriNetElement> selectedElements;
+    
     boolean isArrowButtonPressed;
     
     public PetriNetPane(AnchorPane p, CommandProcessor pr) {
@@ -34,6 +37,8 @@ public class PetriNetPane {
         processor = pr;
         isArrowButtonPressed = false;
         startSetted = false;
+        
+        selectedElements = new ArrayList<>();
     }
     
     public AnchorPane getAnchor() {
@@ -46,6 +51,12 @@ public class PetriNetPane {
     
     public boolean arrowModus() {
         return isArrowButtonPressed;
+    }
+    
+    public AbstractPetriNetElement getHeadSelectedElement() {
+        if (!selectedElements.isEmpty()) {
+            return selectedElements.get(0);
+        } else return null;
     }
     
     public void setStart(double x, double y, AbstractPetriNetElement e) {
@@ -90,5 +101,13 @@ public class PetriNetPane {
 
     public void delete(Arrow arrow) {
         arrow.setVisible(false);
+    }
+        
+    public void deselectElement(AbstractPetriNetElement e) {
+        selectedElements.remove(e);
+    }
+    
+    public void selectElement(AbstractPetriNetElement e) {
+        selectedElements.add(e);
     }
 }

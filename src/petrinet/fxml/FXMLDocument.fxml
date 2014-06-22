@@ -8,67 +8,67 @@
 <?import javafx.scene.text.*?>
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="petrinet.PetriNetController">
-  <children>
-    <MenuBar fx:id="editm" VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#handleNew" text="New" />
-            <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Open…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#handleClose" text="Close" />
-            <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
-            <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save As…" />
-            <MenuItem mnemonicParsing="false" onAction="#handleRevert" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#handlePreferences" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#handleQuit" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem fx:id="undoMenu" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
-            <MenuItem fx:id="redoMenu" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#handleCut" text="Cut" />
-            <MenuItem mnemonicParsing="false" onAction="#handleCopy" text="Copy" />
-            <MenuItem mnemonicParsing="false" onAction="#handlePast" text="Paste" />
-            <MenuItem mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" onAction="#handleSelectAll" text="Select All" />
-            <MenuItem mnemonicParsing="false" onAction="#handleUnselectAll" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-            <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <ToolBar>
-          <items>            
-            <Button mnemonicParsing="false" onAction="#handleNew" style="-fx-graphic: url('http://icons.iconarchive.com/icons/saki/nuoveXT-2/24/Actions-document-new-icon.png');" text="" />
-            <Button mnemonicParsing="false" onAction="#handleOpen" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-9/24/open-file-icon.png');" text="" />
-            <Button mnemonicParsing="false" onAction="#handleSave" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-7/24/Save-icon.png');" text="" />
-            <Separator orientation="VERTICAL" />
-            <Button fx:id="redoButton" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
-            <Button fx:id="undoButton" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
-            <Separator orientation="VERTICAL" />
-            <Button mnemonicParsing="false" onAction="#handlePlace" style="-fx-graphic: url('http://www.i2symbol.com/images/symbols/geometry/white_circle_u25CB_icon_24x24.png');" text=""/>
-            <Button mnemonicParsing="false" onAction="#handleTransition" style="-fx-graphic: url('http://www.i2symbol.com/force_download.php?file=images/symbols/geometry/white_vertical_rectangle_u25AF_icon_24x24.png');" text="" />
-            <Button mnemonicParsing="false" onAction="#handleTimedTransition" style="-fx-graphic: url('http://www.i2symbol.com/force_download.php?file=images/symbols/geometry/black_vertical_rectangle_u25AE_icon_24x24.png');" text="" />
-            <Separator orientation="VERTICAL" />
-            <Button fx:id="arrowButton" mnemonicParsing="false" onAction="#handleNewArrow" style="-fx-graphic: url('https://cdn1.iconfinder.com/data/icons/gnomeicontheme/24x24/stock/image/stock_draw-straight-connector-starts-with-arrow.png');" text="" />
-          </items>
+    <children>
+        <MenuBar fx:id="editm" VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleNew" text="New" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Open…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleClose" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save As…" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleRevert" text="Revert" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handlePreferences" text="Preferences…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleQuit" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem fx:id="undoMenu" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
+                        <MenuItem fx:id="redoMenu" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleCut" text="Cut" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleCopy" text="Copy" />
+                        <MenuItem mnemonicParsing="false" onAction="#handlePast" text="Paste" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleSelectAll" text="Select All" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleUnselectAll" text="Unselect All" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <ToolBar>
+            <items>            
+                <Button mnemonicParsing="false" onAction="#handleNew" style="-fx-graphic: url('http://icons.iconarchive.com/icons/saki/nuoveXT-2/24/Actions-document-new-icon.png');" text="" />
+                <Button mnemonicParsing="false" onAction="#handleOpen" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-9/24/open-file-icon.png');" text="" />
+                <Button mnemonicParsing="false" onAction="#handleSave" style="-fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-7/24/Save-icon.png');" text="" />
+                <Separator orientation="VERTICAL" />
+                <Button fx:id="redoButton" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
+                <Button fx:id="undoButton" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
+                <Separator orientation="VERTICAL" />
+                <Button mnemonicParsing="false" onAction="#handlePlace" style="-fx-graphic: url('http://www.i2symbol.com/images/symbols/geometry/white_circle_u25CB_icon_24x24.png');" text=""/>
+                <Button mnemonicParsing="false" onAction="#handleTransition" style="-fx-graphic: url('http://www.i2symbol.com/force_download.php?file=images/symbols/geometry/white_vertical_rectangle_u25AF_icon_24x24.png');" text="" />
+                <Button mnemonicParsing="false" onAction="#handleTimedTransition" style="-fx-graphic: url('http://www.i2symbol.com/force_download.php?file=images/symbols/geometry/black_vertical_rectangle_u25AE_icon_24x24.png');" text="" />
+                <Separator orientation="VERTICAL" />
+                <Button fx:id="arrowButton" mnemonicParsing="false" onAction="#handleNewArrow" style="-fx-graphic: url('https://cdn1.iconfinder.com/data/icons/gnomeicontheme/24x24/stock/image/stock_draw-straight-connector-starts-with-arrow.png');" text="" />
+            </items>
         </ToolBar>
     <SplitPane dividerPositions="0, 0.7193763919821826" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="-1.0" prefWidth="-1.0">
             <content>
-                <AnchorPane>
+                <AnchorPane SplitPane.resizableWithParent="false">
 <children><TabPane fx:id="tabs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="515.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
   <tabs>
     <Tab onClosed="#saveTab" onSelectionChanged="#selectNewTab" text="Untitled Tab 1">
@@ -84,13 +84,25 @@
         </ScrollPane>
         <AnchorPane SplitPane.resizableWithParent="false">
           <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-            <TableView fx:id="elementTable" layoutY="35.0">
-                <columns>
-                  <TableColumn prefWidth="75.0" text="Element" />
-                  <TableColumn prefWidth="75.0" text="Eigenschaft" />
-                </columns>
-            </TableView>
+            <Label fx:id="datails" alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+            <GridPane fx:id="dets" layoutX="10.0" layoutY="35.0">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+<children>
+    <Label text="Label" />
+    <Label text="Label" GridPane.rowIndex="1" />
+    <Label text="Label" GridPane.rowIndex="2" />
+    <TextField prefHeight="24.0" prefWidth="121.0" GridPane.columnIndex="1" />
+    <TextField prefHeight="24.0" prefWidth="121.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+</children>
+</GridPane>
           </children>
         </AnchorPane>
       </items>
@@ -113,4 +125,5 @@
       </padding>
     </HBox>
   </children>
+
 </VBox>

@@ -31,15 +31,12 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.LineBuilder;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import petrinetelements.Arrow;
 import petrinetelements.PetriNetElement;
 import petrinetelements.Place;
 
@@ -54,14 +51,6 @@ public class PetriNetController implements Initializable {
     private Label label;
     @FXML
     private MenuBar editm;
-    @FXML
-    private AnchorPane elements;
-    @FXML
-    private Label label1;
-    @FXML
-    private Font x1;
-    @FXML
-    private Color x2;
     @FXML
     private AnchorPane a;
     @FXML
@@ -87,10 +76,14 @@ public class PetriNetController implements Initializable {
     
     private ArrayList<PetriNetPane> panes;
     @FXML
-    private TableView<?> elementTable;
+    private Label datails;
+    @FXML
+    private GridPane dets;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        final double MAX_FONT_SIZE = 30.0; // define max font size you need
+        datails.setFont(new Font(MAX_FONT_SIZE));
         processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         panes = new ArrayList<>();
         copiedElements = new ArrayList<>();
@@ -114,7 +107,7 @@ public class PetriNetController implements Initializable {
             }
         
         });*/
-    }    
+    }
 
     @FXML
     private void handleNew(ActionEvent event) throws IOException {
@@ -173,13 +166,15 @@ public class PetriNetController implements Initializable {
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Optionen");
+        stage.setTitle("Preferences - Petri Netz Editor");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
     private void handleQuit(ActionEvent event) {
+        Stage stage = (Stage) undoButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

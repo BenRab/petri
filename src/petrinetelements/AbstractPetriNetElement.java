@@ -100,10 +100,12 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
     public void setSelected(boolean b) {
         selected = b;
         if (selected) {
+            pane.selectElement(this);
             shape.setStroke(Color.RED);
             shape.setStrokeDashOffset(5);
         }
         else {
+            pane.deselectElement(this);
             shape.setStroke(Color.BLACK);
         }
     }
