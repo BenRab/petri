@@ -33,6 +33,7 @@ public class DragAndDropCommand extends AbstractReversebleCommand {
     public void execute() {
         petriNetElement.setLayoutX(endedX);
         petriNetElement.setLayoutY(endedY);
+        
     }
 
     @Override

@@ -193,14 +193,20 @@ public class PetriNetController implements Initializable {
     }
 
     @FXML
-    private void handleCut(ActionEvent event) {
-        for (AbstractPetriNetElement e : copiedElements) {
-            e.setVisible(false);
+    public void handleCut(ActionEvent event) {
+        for (Node n : currentPane.getAnchor().getChildren()) {
+            if (n instanceof AbstractPetriNetElement) {
+                AbstractPetriNetElement e = (AbstractPetriNetElement) n;
+                if (e.isSelected()) {
+                    e.setVisible(false);
+                    copiedElements.add(e);
+                }
+            }
         }
     }
 
     @FXML
-    private void handleCopy(ActionEvent event) {
+    public void handleCopy(ActionEvent event) {
         copiedElements.clear();
         for (Node n : currentPane.getAnchor().getChildren()) {
             if (n instanceof AbstractPetriNetElement) {
@@ -217,11 +223,12 @@ public class PetriNetController implements Initializable {
         for (AbstractPetriNetElement e : copiedElements) {
             AbstractPetriNetElement copied = e.copy();
             currentPane.add(copied);
+            e.setVisible(true);
         }
     }
 
     @FXML
-    private void handleDelete(ActionEvent event) {
+    public void handleDelete(ActionEvent event) {
         for (Node n : currentPane.getAnchor().getChildren()) {
             if (n instanceof PetriNetElement) {
                 PetriNetElement e = (PetriNetElement) n;
