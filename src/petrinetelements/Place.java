@@ -89,4 +89,14 @@ public class Place extends AbstractPetriNetElement {
         name.setLayoutY(layoutY - r * 1.75);    
         return name;
     }
+
+    @Override
+    public double getCenterOffsetX() {
+        return this.RADIUS;
+    }
+
+    @Override
+    public double getCenterOffsetY() {
+        return this.RADIUS;
+    }
 }

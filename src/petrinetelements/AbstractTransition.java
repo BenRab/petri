@@ -40,4 +40,15 @@ abstract public class AbstractTransition extends AbstractPetriNetElement {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    
+    @Override
+    public double getCenterOffsetX() {
+        return rectangle.getWidth();
+    }
+
+    @Override
+    public double getCenterOffsetY() {
+        return rectangle.getHeight();
+    }
+    
 }

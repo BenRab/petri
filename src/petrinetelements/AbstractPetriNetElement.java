@@ -7,9 +7,7 @@
 package petrinetelements;
 
 import CommandSystem.CommandIF;
-import PetriNetCommands.AddArrowCommand;
 import PetriNetCommands.DragAndDropCommand;
-import java.awt.Point;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -89,6 +87,14 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         return selected;
     }
     
+    public ArrayList<Arrow> getStartArrows() {
+        return startArrows;
+    }
+    
+    public ArrayList<Arrow> getEndArrows() {
+        return endArrows;
+    }
+    
     @Override
     public void setSelected(boolean b) {
         selected = b;
@@ -113,16 +119,20 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
             deleteItem
         );
         
-        shape.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        e.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 if (pane.arrowModus()) {
-                    shape.setFill(Color.LIGHTGREEN);
+                    if (pane.startSetted() && pane.getStartElement().getClass() == e.getClass()) {
+                        shape.setFill(Color.RED);
+                    } else {
+                        shape.setFill(Color.LIGHTGREEN);
+                    }
                 }
             }
         });
         
-        shape.setOnMouseExited(new EventHandler<MouseEvent>() {
+        e.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 if (pane.arrowModus()) {
@@ -131,19 +141,15 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
             }
         });
 
-        shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        e.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
                 if (pane.arrowModus()) {
                     if (pane.startSetted()) {
-                        System.out.println(shape.getLayoutX());
                         pane.setEnd(e.getLayoutX() + shape.getBaselineOffset(), e.getLayoutY() + shape.getBaselineOffset(), e);
-                    }
-                    else {
-                        System.out.println(shape.getLayoutX());
+                    } else {
                         pane.setStart(e.getLayoutX() + shape.getBaselineOffset(), e.getLayoutY() + shape.getBaselineOffset(), e);
                     }
-                }
-                else {
+                } else {
                     pane.deselectAllElements();
                     setSelected(true);
                 }
@@ -188,8 +194,18 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         shape.setOnMouseDragged( new EventHandler<MouseEvent>() {
           @Override public void handle( MouseEvent mouseEvent ) {
               if (!pane.arrowModus()) {
-                  setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
-                  setLayoutY(mouseEvent.getSceneY() + dragDeltaY );
+                  double newX = mouseEvent.getSceneX() + dragDeltaX;
+                  double newY = mouseEvent.getSceneY() + dragDeltaY;
+                  setLayoutX(newX);
+                  setLayoutY(newY);
+                  for (Arrow a : startArrows) {
+                      a.setStartX(newX);
+                      a.setStartY(newY);
+                  }
+                  for (Arrow a : endArrows) {
+                      a.setEndX(newX);
+                      a.setEndY(newY);
+                  }
                   setCursor( Cursor.MOVE );
               }
           }
@@ -209,10 +225,14 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
                   setCursor( Cursor.HAND );
                   CommandIF c = new DragAndDropCommand(p, x, y);
                   pane.getProcessor().setCommandExecuted(c);
+                  setSelected(false);
               }
           }
         } );
     }
+    
+    public abstract double getCenterOffsetX();
+    public abstract double getCenterOffsetY();
 
     @Override
     public abstract boolean isPointInElement(double x, double y);

@@ -75,6 +75,10 @@ public class PetriNetPane {
         pane.getChildren().add(n);
     }
     
+    public AbstractPetriNetElement getStartElement() {
+        return startElement;
+    }
+    
     public void deselectAllElements() {
         for (Node n : pane.getChildren()) {
             if (n instanceof AbstractPetriNetElement) {

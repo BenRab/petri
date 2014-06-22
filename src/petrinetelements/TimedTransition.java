@@ -26,4 +26,5 @@ public class TimedTransition extends AbstractTransition {
     public String getName() {
         return "Timed Transition";
     }
+
 }
