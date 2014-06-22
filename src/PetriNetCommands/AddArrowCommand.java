@@ -31,7 +31,6 @@ public class AddArrowCommand extends AbstractReversebleCommand{
 
     @Override
     public void execute() {
-        System.out.println(arrow);
         arrow.setVisible(true);
         endElement.addEndArrow(arrow);
         startElement.addStartArrow(arrow);

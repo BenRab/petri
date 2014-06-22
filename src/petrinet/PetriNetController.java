@@ -96,10 +96,7 @@ public class PetriNetController implements Initializable {
         copiedElements = new ArrayList<>();
         currentPane = new PetriNetPane(a, processor);
         panes.add(currentPane);
-        
-        Arrow a = new Arrow(0,0,100,100);
-        currentPane.add(a);
-        
+               
         //at the moment not included: DESELECTION ON CLICK ON FIELD
         /*a.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -283,7 +280,6 @@ public class PetriNetController implements Initializable {
 
     @FXML
     private void handleNewArrow(ActionEvent event) {
-        System.out.println("asdas");
         if (currentPane.arrowModus()) {
             currentPane.setArrowModus(false);
         } else {

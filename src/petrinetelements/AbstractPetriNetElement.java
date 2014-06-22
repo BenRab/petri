@@ -135,14 +135,13 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
             @Override public void handle(MouseEvent event) {
                 if (pane.arrowModus()) {
                     if (pane.startSetted()) {
-                        pane.setEnd(event.getX(), event.getY(), e);
+                        System.out.println(shape.getLayoutX());
+                        pane.setEnd(e.getLayoutX() + shape.getBaselineOffset(), e.getLayoutY() + shape.getBaselineOffset(), e);
                     }
                     else {
-                        pane.setStart(event.getX(), event.getY(), e);
+                        System.out.println(shape.getLayoutX());
+                        pane.setStart(e.getLayoutX() + shape.getBaselineOffset(), e.getLayoutY() + shape.getBaselineOffset(), e);
                     }
-
-                   // CommandIF c = new AddArrowCommand(pane, a);
-                   // pane.getProcessor().setCommandExecuted(c);
                 }
                 else {
                     pane.deselectAllElements();
@@ -190,7 +189,7 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
           @Override public void handle( MouseEvent mouseEvent ) {
               if (!pane.arrowModus()) {
                   setLayoutX(mouseEvent.getSceneX() + dragDeltaX );
-                  setLayoutY( mouseEvent.getSceneY() + dragDeltaY );
+                  setLayoutY(mouseEvent.getSceneY() + dragDeltaY );
                   setCursor( Cursor.MOVE );
               }
           }

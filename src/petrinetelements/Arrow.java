@@ -25,6 +25,7 @@ public class Arrow extends Pane {
             .endY(endY)
             .build();
         getChildren().add(line);
+        System.out.println(line.getStartX());
     }
     
     public void setStartX(double x) {
