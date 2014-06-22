@@ -97,6 +97,7 @@ public abstract class AbstractPetriNetElement extends Pane {
 
         shape.setOnMouseClicked(new EventHandler<MouseEvent>() {
           @Override public void handle(MouseEvent event) {
+            pane.deselectAllElements();
             setSelected(true);
             if (MouseButton.SECONDARY.equals(event.getButton())) {
               menu.show(pane.getAnchor(), event.getScreenX(), event.getScreenY());

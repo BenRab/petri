@@ -98,7 +98,7 @@
         <AnchorPane SplitPane.resizableWithParent="false">
           <children>
             <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-            <TableView layoutY="35.0">
+            <TableView fx:id="elementTable" layoutY="35.0">
                 <columns>
                   <TableColumn prefWidth="75.0" text="Element" />
                   <TableColumn prefWidth="75.0" text="Eigenschaft" />

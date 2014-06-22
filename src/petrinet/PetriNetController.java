@@ -33,6 +33,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -80,13 +81,16 @@ public class PetriNetController implements Initializable {
     private Button arrowButton;
     
     private ArrayList<PetriNetPane> panes;
+    @FXML
+    private TableView<?> elementTable;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         panes = new ArrayList<>();
         panes.add(new PetriNetPane(a, processor));
-        a.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        //at the moment not included: DESELECTION ON CLICK ON FIELD
+        /*a.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
                 for (Node n : a.getChildren()) {
@@ -101,7 +105,7 @@ public class PetriNetController implements Initializable {
                 }
             }
         
-        });
+        });*/
     }    
 
     @FXML

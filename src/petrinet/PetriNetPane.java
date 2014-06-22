@@ -7,7 +7,9 @@
 package petrinet;
 
 import CommandSystem.CommandProcessor;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import petrinetelements.AbstractPetriNetElement;
 
 /**
  *
@@ -28,5 +30,14 @@ public class PetriNetPane {
     
     public CommandProcessor getProcessor() {
         return processor;
+    }
+    
+    public void deselectAllElements() {
+        for (Node n : pane.getChildren()) {
+            if (n instanceof AbstractPetriNetElement) {
+                AbstractPetriNetElement e = (AbstractPetriNetElement) n;
+                e.setSelected(false);
+            }
+        }
     }
 }
