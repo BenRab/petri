@@ -8,7 +8,12 @@ package petrinet;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -16,6 +21,10 @@ import javafx.fxml.Initializable;
  * @author ben
  */
 public class HelpController implements Initializable {
+    @FXML
+    private Button HelpCloseButton;
+    @FXML
+    private Button HelpCloseButton2;
 
     /**
      * Initializes the controller class.
@@ -24,5 +33,11 @@ public class HelpController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void handleCloseHelp(ActionEvent event) {
+        Stage stage = (Stage) HelpCloseButton.getScene().getWindow();
+        stage.close();
+    }
     
 }
