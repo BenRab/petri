@@ -6,10 +6,20 @@
 
 package petrinetelements;
 
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author ben
  */
 public interface PetriNetElement {
+    public void setName(String n);
     
+    public String getName();
+    
+    public boolean isSelected();
+    
+    public void setSelected(boolean b);
+    
+    public boolean isPointInElement(double x, double y);
 }

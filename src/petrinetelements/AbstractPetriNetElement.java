@@ -61,18 +61,22 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         return shape.getLayoutY();
     }
     
+    @Override
     public void setName(String n) {
         name.setText(n);
     }
     
+    @Override
     public String getName() {
         return name.getText();
     }
     
+    @Override
     public boolean isSelected() {
         return selected;
     }
     
+    @Override
     public void setSelected(boolean b) {
         selected = b;
         if (selected) {
@@ -168,5 +172,6 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
         } );
     }
 
+    @Override
     public abstract boolean isPointInElement(double x, double y);
 }

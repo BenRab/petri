@@ -13,10 +13,18 @@ import javafx.scene.shape.Line;
  * @author ben
  */
 public class Arrow extends Line {
-    PetriNetElement element;
+    PetriNetElement startElement;
+    PetriNetElement endElement;
     
-    public Arrow(PetriNetElement e) {
-        element = e;
+    public Arrow(PetriNetElement start) {
+        startElement = start;
     }
     
+    public PetriNetElement getStartElement() {
+        return startElement;
+    }
+    
+    public void setEndElement() {
+        
+    }
 }

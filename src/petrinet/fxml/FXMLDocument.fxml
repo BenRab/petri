@@ -62,7 +62,6 @@
             <Button mnemonicParsing="false" onAction="#handleTimedTransition" style="-fx-graphic: url('http://www.i2symbol.com/force_download.php?file=images/symbols/geometry/black_vertical_rectangle_u25AE_icon_24x24.png');" text="" />
             <Separator orientation="VERTICAL" />
             <Button fx:id="arrowButton" mnemonicParsing="false" onAction="#handleNewArrow" style="-fx-graphic: url('https://cdn1.iconfinder.com/data/icons/gnomeicontheme/24x24/stock/image/stock_draw-straight-connector-starts-with-arrow.png');" text="" />
-            <Button mnemonicParsing="false" onAction="#handleTimedTransition" text="Inhibitor" />
           </items>
         </ToolBar>
     <SplitPane dividerPositions="0.1, 0.7193763919821826" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
