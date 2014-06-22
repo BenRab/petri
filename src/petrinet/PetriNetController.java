@@ -87,7 +87,7 @@ public class PetriNetController implements Initializable {
         processor = new CommandProcessor(undoMenu, redoMenu, redoButton, undoButton);
         panes = new ArrayList<>();
         copiedElements = new ArrayList<>();
-        currentPane = new PetriNetPane(a, processor);
+        currentPane = new PetriNetPane(a, processor, dets);
         panes.add(currentPane);
                
         //at the moment not included: DESELECTION ON CLICK ON FIELD

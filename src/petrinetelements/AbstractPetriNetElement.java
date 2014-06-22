@@ -256,6 +256,8 @@ public abstract class AbstractPetriNetElement extends Pane implements PetriNetEl
     
     public abstract double getCenterOffsetX();
     public abstract double getCenterOffsetY();
+    
+    public abstract void makeDetailsMenu();
 
     @Override
     public abstract boolean isPointInElement(double x, double y);

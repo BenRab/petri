@@ -6,10 +6,12 @@
 
 package petrinetelements;
 
-import CommandSystem.CommandProcessor;
 import java.util.Stack;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import petrinet.PetriNetPane;
@@ -23,6 +25,7 @@ public class Place extends AbstractPetriNetElement {
     Stack<Circle> tokens = new Stack<>();
     double layoutY, layoutX;
     double r;
+    Label name = new Label("Place");;
     
     public Place(double x, double y, double radius, PetriNetPane p) {
         super(new Circle(x, y, radius), Color.WHITE, p);
@@ -31,7 +34,8 @@ public class Place extends AbstractPetriNetElement {
         layoutY = y;
         
         r = radius;
-        name = this.getLabel();
+        name.setLayoutX(layoutX - r * 0.75);
+        name.setLayoutY(layoutY - r * 1.75); 
         getChildren().addAll(this.shape, name);
     }
 
@@ -84,9 +88,6 @@ public class Place extends AbstractPetriNetElement {
 
     @Override
     public Label getLabel() {
-        name = new Label("Place");
-        name.setLayoutX(layoutX - r * 0.75);
-        name.setLayoutY(layoutY - r * 1.75);    
         return name;
     }
 
@@ -98,5 +99,30 @@ public class Place extends AbstractPetriNetElement {
     @Override
     public double getCenterOffsetY() {
         return this.r;
+    }
+
+    @Override
+    public void makeDetailsMenu() {
+        Label lName = new Label("Name");
+        Label lTokens = new Label("Tokens");
+        
+        final TextField tName = new TextField();
+        tName.setOnInputMethodTextChanged(new EventHandler<InputMethodEvent>() {
+               @Override
+               public void handle(InputMethodEvent inputMethodEvent) {
+                    System.out.println("Text changed");
+               }
+          });
+        TextField tTokens = new TextField();
+        tName.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent t) {
+                    getLabel().setText(tName.getText());
+                    System.out.println(tName.getText());
+            }
+          });
+        //tName.setOnKeyReleased(x);
+        this.pane.getDetails().getChildren().clear();
+        this.pane.getDetails().add(lName, 0, 0);
+        this.pane.getDetails().add(tName, 1, 0);
     }
 }

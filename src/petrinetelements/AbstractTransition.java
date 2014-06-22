@@ -51,4 +51,9 @@ abstract public class AbstractTransition extends AbstractPetriNetElement {
         return rectangle.getHeight();
     }
     
+        @Override
+    public void makeDetailsMenu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
