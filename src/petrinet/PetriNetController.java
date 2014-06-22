@@ -173,13 +173,15 @@ public class PetriNetController implements Initializable {
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Optionen");
+        stage.setTitle("Preferences - Petri Netz Editor");
         stage.setScene(scene);
         stage.show();
     }
 
     @FXML
     private void handleQuit(ActionEvent event) {
+        Stage stage = (Stage) undoButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
