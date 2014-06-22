@@ -64,20 +64,8 @@
             <Button fx:id="arrowButton" mnemonicParsing="false" onAction="#handleNewArrow" style="-fx-graphic: url('https://cdn1.iconfinder.com/data/icons/gnomeicontheme/24x24/stock/image/stock_draw-straight-connector-starts-with-arrow.png');" text="" />
           </items>
         </ToolBar>
-    <SplitPane dividerPositions="0.1, 0.7193763919821826" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0, 0.7193763919821826" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane fx:id="elements">
-          <children>
-            <Label fx:id="label1" alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Dokumente" textAlignment="CENTER" wrapText="false">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-              <textFill>
-                <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
-              </textFill>
-            </Label>
-          </children>
-        </AnchorPane>
         <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="-1.0" prefWidth="-1.0">
             <content>
                 <AnchorPane>
