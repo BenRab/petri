@@ -27,5 +27,24 @@ public class Transition extends AbstractTransition {
     public String getName() {
         return "Transition";
     }
+
+    @Override
+    public String getHelpText() {
+                return "Transitionen stellen die Übergänge \n "
+                + "zwischen Zuständen dar.  Diese \n"
+                + "Übergänge werden automatisch aktiviert, \n"
+                + " wenn bestimmte Voraussetzungen getroffen \n "
+                + "sind. Im einfachsten Fall wird eine \n "
+                + "Transition aktiviert, sobald alle Plätze, \n"
+                + " die mit einem Pfeil auf die Transition \n "
+                + "weisen, einen Token besitzen. Es besteht \n"
+                + " die Möglichkeit, mehr als einen Token \n "
+                + "pro Platz zu verlangen, damit eine \n "
+                + "Transition aktiviert werden kann. \n "
+                + "Die einfache Transition sorgt dafür, dass die \n "
+                + "Transition zu einem zufälligen Zeitpunkt \n "
+                + "feuert, während die Bedingungen erfüllt sind, \n "
+                + "so wählen sie das unausgefüllt Rechteck aus.";
+    }
     
 }

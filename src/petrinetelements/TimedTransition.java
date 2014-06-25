@@ -27,4 +27,23 @@ public class TimedTransition extends AbstractTransition {
         return "Timed Transition";
     }
 
+    @Override
+    public String getHelpText() {
+        return "Transitionen stellen die Übergänge \n "
+                + "zwischen Zuständen dar.  Diese \n"
+                + "Übergänge werden automatisch aktiviert, \n"
+                + " wenn bestimmte Voraussetzungen getroffen \n "
+                + "sind. Im einfachsten Fall wird eine \n "
+                + "Transition aktiviert, sobald alle Plätze, \n"
+                + " die mit einem Pfeil auf die Transition \n "
+                + "weisen, einen Token besitzen. Es besteht \n"
+                + " die Möglichkeit, mehr als einen Token \n "
+                + "pro Platz zu verlangen, damit eine \n "
+                + "Transition aktiviert werden kann. \n "
+                + " Die Timed Transition sorgt dafür, sie \n"
+                + "sofort feuert, wenn die Bedingungen erfüllt \n"
+                + " sind, wählen sie in der Werkzeugleiste \n"
+                + " das schwarze gefüllte Rechteck aus. \n ";
+    }
+
 }

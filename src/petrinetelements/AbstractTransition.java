@@ -55,6 +55,8 @@ abstract public class AbstractTransition extends AbstractPetriNetElement {
         return rectangle.getHeight();
     }
     
+    public abstract String getHelpText();
+    
         @Override
     public void makeDetailsMenu() {
         Label lName = new Label("Name");
@@ -70,6 +72,8 @@ abstract public class AbstractTransition extends AbstractPetriNetElement {
         this.pane.getDetails().getChildren().clear();
         this.pane.getDetails().add(lName, 0, 0);
         this.pane.getDetails().add(tName, 0,1);
+        
+        this.pane.getHelpLabel().setText(this.getHelpText());
   }
     
 }
